@@ -1,0 +1,176 @@
+.admin-container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.page-header {
+  margin-bottom: 25px;
+}
+
+.page-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #777;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+
+.stat-card mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.stat-card span {
+  display: block;
+  color: #777;
+  font-size: 14px;
+}
+
+.stat-card strong {
+  display: block;
+  font-size: 24px;
+  margin-top: 5px;
+}
+
+.admin-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.card-header h2 {
+  margin: 0 0 5px;
+}
+
+.card-header p {
+  margin: 0;
+  color: #777;
+}
+
+.overview-grid,
+.system-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.overview-item,
+.system-grid > div {
+  padding: 15px;
+  background: #f7f7f7;
+  border-radius: 8px;
+}
+
+.overview-item span,
+.system-grid span {
+  display: block;
+  color: #777;
+  font-size: 13px;
+}
+
+.overview-item strong,
+.system-grid strong {
+  display: block;
+  margin-top: 5px;
+}
+
+.status-online {
+  color: #198754;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  font-weight: 600;
+}
+
+.success {
+  color: #198754;
+  font-weight: 600;
+}
+
+.failed {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #777;
+}
+
+.empty-state mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 900px) {
+
+  .stats-grid,
+  .overview-grid,
+  .system-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .admin-container {
+    padding: 15px;
+  }
+
+  .stats-grid,
+  .overview-grid,
+  .system-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

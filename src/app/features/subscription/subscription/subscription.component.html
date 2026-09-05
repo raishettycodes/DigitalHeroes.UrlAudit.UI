@@ -1,0 +1,628 @@
+<div class="subscription-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-content">
+
+      <div class="header-icon">
+        <mat-icon>credit_card</mat-icon>
+      </div>
+
+      <div>
+        <h1>Subscription</h1>
+        <p>Manage your plan, audit limits and billing.</p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Loading State -->
+  <div
+    class="loading-state"
+    *ngIf="loading">
+
+    <mat-spinner diameter="40"></mat-spinner>
+
+    <p>Loading subscription...</p>
+
+  </div>
+
+
+  <!-- Subscription Content -->
+  <div
+    class="subscription-content"
+    *ngIf="!loading && subscription">
+
+
+    <!-- ========================= -->
+    <!-- Current Plan -->
+    <!-- ========================= -->
+
+    <section class="current-plan-card">
+
+      <div class="plan-info">
+
+        <div class="plan-icon">
+          <mat-icon>workspace_premium</mat-icon>
+        </div>
+
+        <div>
+          <span class="label">Current Plan</span>
+
+          <h2>
+            {{ subscription.plan }}
+          </h2>
+
+          <p>
+            Your current audit subscription.
+          </p>
+        </div>
+
+      </div>
+
+
+      <span
+        class="active-badge"
+        [class.inactive]="!subscription.isActive">
+
+        <mat-icon>
+          {{
+            subscription.isActive
+              ? 'check_circle'
+              : 'cancel'
+          }}
+        </mat-icon>
+
+        {{
+          subscription.isActive
+            ? 'Active'
+            : 'Inactive'
+        }}
+
+      </span>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- Monthly Usage -->
+    <!-- ========================= -->
+
+    <section class="usage-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Monthly Usage</h2>
+          <p>
+            Track your website audit usage.
+          </p>
+        </div>
+
+        <mat-icon>data_usage</mat-icon>
+
+      </div>
+
+
+      <div class="usage-numbers">
+
+        <!-- Audits Used -->
+        <div class="usage-item">
+
+          <strong>
+            {{ subscription.auditsUsed }}
+          </strong>
+
+          <span>
+            Audits Used
+          </span>
+
+        </div>
+
+
+        <!-- Remaining Audits -->
+        <div class="usage-item">
+
+          <strong>
+            {{
+              subscription.isUnlimited
+                ? 'Unlimited'
+                : subscription.remainingAudits
+            }}
+          </strong>
+
+          <span>
+            Remaining
+          </span>
+
+        </div>
+
+
+        <!-- Monthly Limit -->
+        <div class="usage-item">
+
+          <strong>
+            {{
+              subscription.isUnlimited
+                ? 'Unlimited'
+                : subscription.monthlyAuditLimit
+            }}
+          </strong>
+
+          <span>
+            Monthly Limit
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- Usage Progress -->
+
+      <div class="progress-header">
+
+        <span>
+          Usage
+        </span>
+
+        <strong>
+          {{
+            subscription.isUnlimited
+              ? 'Unlimited'
+              : subscription.usagePercentage + '%'
+          }}
+        </strong>
+
+      </div>
+
+
+      <div
+        class="progress-bar"
+        *ngIf="!subscription.isUnlimited">
+
+        <div
+          class="progress-fill"
+          [style.width.%]="subscription.usagePercentage">
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- Available Plans -->
+    <!-- ========================= -->
+
+    <section class="plans-section">
+
+      <div class="section-header">
+
+        <div>
+          <h2>Available Plans</h2>
+
+          <p>
+            Choose the plan that best fits your audit needs.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="plans-grid">
+
+
+        <!-- ========================= -->
+        <!-- FREE -->
+        <!-- ========================= -->
+
+        <div
+          class="plan-card"
+          [class.current]="subscription.plan === 'Free'">
+
+          <div class="plan-header">
+
+            <div>
+
+              <h3>Free</h3>
+
+              <p>
+                For getting started
+              </p>
+
+            </div>
+
+            <div class="plan-type-icon">
+
+              <mat-icon>
+                person
+              </mat-icon>
+
+            </div>
+
+          </div>
+
+
+          <div class="price">
+
+            ₹0
+
+            <span>
+              /month
+            </span>
+
+          </div>
+
+
+          <ul>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              100 audits / month
+            </li>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              SEO analysis
+            </li>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              Audit history
+            </li>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              Website management
+            </li>
+
+          </ul>
+
+
+          <button
+            mat-stroked-button
+            type="button"
+            disabled>
+
+            {{
+              subscription.plan === 'Free'
+                ? 'Current Plan'
+                : 'Free Plan'
+            }}
+
+          </button>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- STARTER -->
+        <!-- ========================= -->
+
+        <div
+          class="plan-card"
+          [class.current]="subscription.plan === 'Starter'">
+
+          <div class="plan-header">
+
+            <div>
+
+              <h3>
+                Starter
+              </h3>
+
+              <p>
+                For small projects
+              </p>
+
+            </div>
+
+            <div class="plan-type-icon">
+
+              <mat-icon>
+                trending_up
+              </mat-icon>
+
+            </div>
+
+          </div>
+
+
+          <div class="price">
+
+            ₹199
+
+            <span>
+              /month
+            </span>
+
+          </div>
+
+
+          <ul>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              500 audits / month
+            </li>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              SEO analysis
+            </li>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              Audit history
+            </li>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              Website management
+            </li>
+
+          </ul>
+
+
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            [disabled]="
+              subscription.plan === 'Starter' ||
+              loading
+            "
+            (click)="upgrade('Starter')">
+
+            {{
+              subscription.plan === 'Starter'
+                ? 'Current Plan'
+                : 'Upgrade to Starter'
+            }}
+
+          </button>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- PROFESSIONAL -->
+        <!-- ========================= -->
+
+        <div
+          class="plan-card featured"
+          [class.current]="subscription.plan === 'Professional'">
+
+          <div class="popular">
+            Most Popular
+          </div>
+
+
+          <div class="plan-header">
+
+            <div>
+
+              <h3>
+                Professional
+              </h3>
+
+              <p>
+                For professionals
+              </p>
+
+            </div>
+
+
+            <div class="plan-type-icon">
+
+              <mat-icon>
+                rocket_launch
+              </mat-icon>
+
+            </div>
+
+          </div>
+
+
+          <div class="price">
+
+            ₹499
+
+            <span>
+              /month
+            </span>
+
+          </div>
+
+
+          <ul>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              2,000 audits / month
+            </li>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              Advanced SEO analysis
+            </li>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              Detailed reports
+            </li>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              Priority support
+            </li>
+
+          </ul>
+
+
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            [disabled]="
+              subscription.plan === 'Professional' ||
+              loading
+            "
+            (click)="upgrade('Professional')">
+
+            {{
+              subscription.plan === 'Professional'
+                ? 'Current Plan'
+                : 'Upgrade to Professional'
+            }}
+
+          </button>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- AGENCY -->
+        <!-- ========================= -->
+
+        <div
+          class="plan-card"
+          [class.current]="subscription.plan === 'Agency'">
+
+          <div class="plan-header">
+
+            <div>
+
+              <h3>
+                Agency
+              </h3>
+
+              <p>
+                For teams and businesses
+              </p>
+
+            </div>
+
+
+            <div class="plan-type-icon">
+
+              <mat-icon>
+                business
+              </mat-icon>
+
+            </div>
+
+          </div>
+
+
+          <div class="price">
+
+            ₹1,499
+
+            <span>
+              /month
+            </span>
+
+          </div>
+
+
+          <ul>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              Unlimited audits
+            </li>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              Advanced reports
+            </li>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              Team management
+            </li>
+
+            <li>
+              <mat-icon>check</mat-icon>
+              Priority support
+            </li>
+
+          </ul>
+
+
+          <button
+            mat-stroked-button
+            color="primary"
+            type="button"
+            [disabled]="
+              subscription.plan === 'Agency' ||
+              loading
+            "
+            (click)="upgrade('Agency')">
+
+            {{
+              subscription.plan === 'Agency'
+                ? 'Current Plan'
+                : 'Upgrade to Agency'
+            }}
+
+          </button>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- No Data / Error State -->
+  <!-- ========================= -->
+
+  <div
+    class="empty-state"
+    *ngIf="!loading && !subscription">
+
+    <div class="empty-icon">
+
+      <mat-icon>
+        error_outline
+      </mat-icon>
+
+    </div>
+
+
+    <h3>
+      Subscription information unavailable
+    </h3>
+
+
+    <p>
+      Unable to load your subscription details.
+    </p>
+
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="loadSubscription()">
+
+      <mat-icon>
+        refresh
+      </mat-icon>
+
+      Retry
+
+    </button>
+
+  </div>
+
+</div>
+

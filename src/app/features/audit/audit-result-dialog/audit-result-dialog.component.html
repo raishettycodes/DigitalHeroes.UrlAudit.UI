@@ -1,0 +1,486 @@
+<h2 mat-dialog-title class="dialog-title">
+
+  <div class="title-left">
+
+    <mat-icon>analytics</mat-icon>
+
+    <span>Audit Result</span>
+
+  </div>
+
+</h2>
+
+
+<mat-dialog-content>
+
+  <!-- ========================= -->
+  <!-- WEBSITE -->
+  <!-- ========================= -->
+
+  <div class="website-header">
+
+    <div>
+
+      <span class="label">
+        Website
+      </span>
+
+      <h3>
+        {{ data.result.url }}
+      </h3>
+
+    </div>
+
+    <span class="date">
+
+      {{ data.result.createdAt | date:'dd MMM yyyy, HH:mm' }}
+
+    </span>
+
+  </div>
+
+
+  <mat-divider></mat-divider>
+
+
+  <!-- ========================= -->
+  <!-- SUMMARY -->
+  <!-- ========================= -->
+
+  <h3 class="section-title">
+    Audit Summary
+  </h3>
+
+
+  <div class="summary-grid">
+
+    <!-- STATUS -->
+
+    <div class="summary-box">
+
+      <span class="label">
+        Status
+      </span>
+
+      <strong
+        *ngIf="data.result.isReachable"
+        class="success-text">
+
+        <mat-icon>check_circle</mat-icon>
+
+        Available
+
+      </strong>
+
+      <strong
+        *ngIf="!data.result.isReachable"
+        class="error-text">
+
+        <mat-icon>cancel</mat-icon>
+
+        Failed
+
+      </strong>
+
+    </div>
+
+
+    <!-- HTTP -->
+
+    <div class="summary-box">
+
+      <span class="label">
+        HTTP Status
+      </span>
+
+      <strong>
+
+        {{ data.result.statusCode }}
+
+      </strong>
+
+    </div>
+
+
+    <!-- RESPONSE -->
+
+    <div class="summary-box">
+
+      <span class="label">
+        Response Time
+      </span>
+
+      <strong>
+
+        {{ data.result.responseTimeMs }} ms
+
+      </strong>
+
+    </div>
+
+
+    <!-- SEO -->
+
+    <div class="summary-box">
+
+      <span class="label">
+        SEO Score
+      </span>
+
+      <strong class="seo-score">
+
+        {{ data.result.seoScore ?? 0 }}/100
+
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <mat-divider></mat-divider>
+
+
+  <!-- ========================= -->
+  <!-- SEO ANALYSIS -->
+  <!-- ========================= -->
+
+  <h3 class="section-title">
+
+    <mat-icon>search</mat-icon>
+
+    SEO Analysis
+
+  </h3>
+
+
+  <div class="details-grid">
+
+    <!-- TITLE -->
+
+    <div class="detail-item">
+
+      <span>
+        Page Title
+      </span>
+
+      <strong>
+
+        {{ data.result.title || 'Not found' }}
+
+      </strong>
+
+    </div>
+
+
+    <!-- META -->
+
+    <div class="detail-item">
+
+      <span>
+        Meta Description
+      </span>
+
+      <strong>
+
+        {{ data.result.metaDescription || 'Not found' }}
+
+      </strong>
+
+    </div>
+
+
+    <!-- H1 -->
+
+    <div class="detail-item">
+
+      <span>
+        H1 Headings
+      </span>
+
+      <strong>
+
+        {{ data.result.h1Count ?? 0 }}
+
+      </strong>
+
+    </div>
+
+
+    <!-- H2 -->
+
+    <div class="detail-item">
+
+      <span>
+        H2 Headings
+      </span>
+
+      <strong>
+
+        {{ data.result.h2Count ?? 0 }}
+
+      </strong>
+
+    </div>
+
+
+    <!-- IMAGES -->
+
+    <div class="detail-item">
+
+      <span>
+        Images
+      </span>
+
+      <strong>
+
+        {{ data.result.images ?? 0 }}
+
+      </strong>
+
+    </div>
+
+
+    <!-- ALT -->
+
+    <div class="detail-item">
+
+      <span>
+        Images Without ALT
+      </span>
+
+      <strong
+        [class.error-text]="
+          (data.result.imagesWithoutAlt ?? 0) > 0
+        "
+        [class.success-text]="
+          (data.result.imagesWithoutAlt ?? 0) === 0
+        ">
+
+        {{ data.result.imagesWithoutAlt ?? 0 }}
+
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <mat-divider></mat-divider>
+
+
+  <!-- ========================= -->
+  <!-- TECHNICAL DETAILS -->
+  <!-- ========================= -->
+
+  <h3 class="section-title">
+
+    <mat-icon>settings</mat-icon>
+
+    Technical Details
+
+  </h3>
+
+
+  <div class="details-grid">
+
+    <!-- SSL -->
+
+    <div class="detail-item">
+
+      <span>
+        SSL
+      </span>
+
+      <strong
+        *ngIf="data.result.isSslValid"
+        class="success-text">
+
+        Valid
+
+      </strong>
+
+      <strong
+        *ngIf="data.result.isSslValid === false"
+        class="error-text">
+
+        Invalid
+
+      </strong>
+
+      <strong
+        *ngIf="data.result.isSslValid == null">
+
+        N/A
+
+      </strong>
+
+    </div>
+
+
+    <!-- HTTP VERSION -->
+
+    <div class="detail-item">
+
+      <span>
+        HTTP Version
+      </span>
+
+      <strong>
+
+        {{ data.result.httpVersion || 'N/A' }}
+
+      </strong>
+
+    </div>
+
+
+    <!-- SERVER -->
+
+    <div class="detail-item">
+
+      <span>
+        Server
+      </span>
+
+      <strong>
+
+        {{ data.result.server || 'N/A' }}
+
+      </strong>
+
+    </div>
+
+
+    <!-- CONTENT TYPE -->
+
+    <div class="detail-item">
+
+      <span>
+        Content Type
+      </span>
+
+      <strong>
+
+        {{ data.result.contentType || 'N/A' }}
+
+      </strong>
+
+    </div>
+
+
+    <!-- CONTENT LENGTH -->
+
+    <div class="detail-item">
+
+      <span>
+        Content Length
+      </span>
+
+      <strong>
+
+        {{ data.result.contentLength ?? 0 }} bytes
+
+      </strong>
+
+    </div>
+
+
+    <!-- REDIRECT -->
+
+    <div class="detail-item">
+
+      <span>
+        Redirect
+      </span>
+
+      <strong
+        *ngIf="data.result.isRedirect === false"
+        class="success-text">
+
+        No
+
+      </strong>
+
+      <strong
+        *ngIf="data.result.isRedirect === true">
+
+        Yes
+
+      </strong>
+
+      <strong
+        *ngIf="data.result.isRedirect == null">
+
+        N/A
+
+      </strong>
+
+    </div>
+
+
+    <!-- REDIRECT LOCATION -->
+
+    <div
+      class="detail-item"
+      *ngIf="data.result.redirectLocation">
+
+      <span>
+        Redirect Location
+      </span>
+
+      <strong>
+
+        {{ data.result.redirectLocation }}
+
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <mat-divider></mat-divider>
+
+
+  <!-- ========================= -->
+  <!-- MESSAGE -->
+  <!-- ========================= -->
+
+  <div class="message-box">
+
+    <mat-icon>info</mat-icon>
+
+    <div>
+
+      <span class="label">
+        Message
+      </span>
+
+      <p>
+        {{ data.result.message }}
+      </p>
+
+    </div>
+
+  </div>
+
+</mat-dialog-content>
+
+
+<!-- ========================= -->
+<!-- ACTIONS -->
+<!-- ========================= -->
+
+<mat-dialog-actions align="end">
+
+  <button
+    mat-button
+    type="button"
+    (click)="close()">
+
+    Close
+
+  </button>
+
+</mat-dialog-actions>

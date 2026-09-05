@@ -1,0 +1,172 @@
+/* Login Page */
+
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 36px 34px;
+
+  background: #ffffff;
+  border-radius: 16px;
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.08);
+
+  box-sizing: border-box;
+}
+
+/* Title */
+
+.login-container h2 {
+  margin: 0 0 30px;
+
+  text-align: center;
+
+  font-size: 28px;
+  font-weight: 600;
+
+  color: #1f2937;
+}
+
+/* Form */
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form group */
+
+.login-container form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+/* Labels */
+
+.login-container label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Inputs */
+
+.login-container input {
+  width: 100%;
+  height: 46px;
+
+  padding: 0 14px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  font-size: 15px;
+  color: #111827;
+
+  outline: none;
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.login-container input::placeholder {
+  color: #9ca3af;
+}
+
+.login-container input:focus {
+  border-color: #3f51b5;
+
+  box-shadow:
+    0 0 0 3px rgba(63, 81, 181, 0.12);
+}
+
+/* Invalid browser validation */
+
+.login-container input:invalid:not(:placeholder-shown) {
+  border-color: #dc2626;
+}
+
+/* Error message */
+
+.error-message {
+  padding: 11px 13px;
+
+  border-radius: 7px;
+
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+
+  color: #b91c1c;
+
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Login button */
+
+.login-container button {
+  width: 100%;
+  height: 46px;
+
+  margin-top: 4px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #3f51b5;
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.1s ease;
+}
+
+.login-container button:hover:not(:disabled) {
+  background: #303f9f;
+
+  box-shadow:
+    0 5px 14px rgba(63, 81, 181, 0.25);
+}
+
+.login-container button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.login-container button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .login-container {
+    max-width: none;
+
+    margin: 40px 16px;
+    padding: 30px 22px;
+
+    border-radius: 14px;
+  }
+
+  .login-container h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+}

@@ -1,0 +1,312 @@
+<div class="admin-container">
+
+  <div class="page-header">
+
+    <div>
+      <h1>
+        <mat-icon>admin_panel_settings</mat-icon>
+        Admin
+      </h1>
+
+      <p>
+        Manage and monitor the URL Audit platform.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- STATISTICS -->
+
+  <div
+    class="stats-grid"
+    *ngIf="statistics">
+
+    <div class="stat-card">
+
+      <mat-icon>assessment</mat-icon>
+
+      <div>
+        <span>Total Audits</span>
+        <strong>
+          {{ statistics.totalAudits }}
+        </strong>
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <mat-icon>check_circle</mat-icon>
+
+      <div>
+        <span>Successful</span>
+        <strong>
+          {{ statistics.successfulAudits }}
+        </strong>
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <mat-icon>error</mat-icon>
+
+      <div>
+        <span>Failed</span>
+        <strong>
+          {{ statistics.failedAudits }}
+        </strong>
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <mat-icon>speed</mat-icon>
+
+      <div>
+        <span>Average Response</span>
+        <strong>
+          {{ statistics.averageResponseTimeMs }} ms
+        </strong>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PLATFORM OVERVIEW -->
+
+  <div class="admin-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Platform Overview</h2>
+
+        <p>
+          Current URL Audit platform performance.
+        </p>
+      </div>
+
+      <mat-icon>
+        dashboard
+      </mat-icon>
+
+    </div>
+
+
+    <div class="overview-grid">
+
+      <div class="overview-item">
+
+        <span>Success Rate</span>
+
+        <strong>
+          {{ successRate }}%
+        </strong>
+
+      </div>
+
+
+      <div class="overview-item">
+
+        <span>Current Plan</span>
+
+        <strong>
+          Free
+        </strong>
+
+      </div>
+
+
+      <div class="overview-item">
+
+        <span>Monthly Limit</span>
+
+        <strong>
+          100 audits
+        </strong>
+
+      </div>
+
+
+      <div class="overview-item">
+
+        <span>Platform Status</span>
+
+        <strong class="status-online">
+          ● Online
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RECENT AUDITS -->
+
+  <div class="admin-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Recent Audits</h2>
+
+        <p>
+          Latest audit activity across the platform.
+        </p>
+      </div>
+
+      <mat-icon>
+        history
+      </mat-icon>
+
+    </div>
+
+
+    <div
+      class="table-responsive"
+      *ngIf="history.length > 0">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Website</th>
+
+            <th>Status</th>
+
+            <th>HTTP</th>
+
+            <th>Response</th>
+
+            <th>Date</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let audit of history">
+
+            <td>
+              {{ audit.url }}
+            </td>
+
+            <td>
+
+              <span
+                [class.success]="audit.isReachable"
+                [class.failed]="!audit.isReachable">
+
+                {{
+                  audit.isReachable
+                    ? 'Successful'
+                    : 'Failed'
+                }}
+
+              </span>
+
+            </td>
+
+            <td>
+              {{ audit.statusCode }}
+            </td>
+
+            <td>
+              {{ audit.responseTimeMs }} ms
+            </td>
+
+            <td>
+              {{ audit.createdAt | date:'dd MMM yyyy, HH:mm' }}
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div
+      class="empty-state"
+      *ngIf="history.length === 0">
+
+      <mat-icon>
+        history
+      </mat-icon>
+
+      <p>
+        No audit activity available.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- SYSTEM -->
+
+  <div class="admin-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>System Information</h2>
+
+        <p>
+          URL Audit platform information.
+        </p>
+      </div>
+
+      <mat-icon>
+        info
+      </mat-icon>
+
+    </div>
+
+
+    <div class="system-grid">
+
+      <div>
+        <span>Application</span>
+        <strong>DigitalHeroes URL Audit</strong>
+      </div>
+
+      <div>
+        <span>Environment</span>
+        <strong>Development</strong>
+      </div>
+
+      <div>
+        <span>API Status</span>
+        <strong class="status-online">
+          Online
+        </strong>
+      </div>
+
+      <div>
+        <span>Version</span>
+        <strong>1.0.0</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,179 @@
+<div class="page-container">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+
+    <div class="header-content">
+
+      <div class="header-icon">
+        <mat-icon>notifications</mat-icon>
+      </div>
+
+      <div>
+        <h1>Notifications</h1>
+
+        <p>
+          Stay updated with your website audits and account activity.
+        </p>
+      </div>
+
+    </div>
+
+    <button
+      mat-stroked-button
+      color="primary"
+      type="button"
+      [disabled]="unreadCount === 0"
+      (click)="markAllAsRead()">
+
+      <mat-icon>done_all</mat-icon>
+
+      Mark all as read
+
+    </button>
+
+  </div>
+
+
+  <!-- LOADING -->
+  <div
+    class="loading-state"
+    *ngIf="loading">
+
+    <mat-icon>notifications</mat-icon>
+
+    <p>
+      Loading notifications...
+    </p>
+
+  </div>
+
+
+  <!-- CONTENT -->
+  <div
+    class="notifications-content"
+    *ngIf="!loading">
+
+    <!-- SUMMARY -->
+    <div class="notification-summary">
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          <mat-icon>notifications_active</mat-icon>
+        </div>
+
+        <div class="summary-content">
+
+          <span>Unread Notifications</span>
+
+          <strong>
+            {{ unreadCount }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- NOTIFICATION LIST -->
+<div class="notifications-list">
+
+  <div
+    class="notification-card"
+    *ngFor="let notification of notifications"
+    [class.unread]="!notification.isRead"
+    [class]="getNotificationClass(notification.type)"
+    role="button"
+    tabindex="0"
+    (click)="markAsRead(notification)"
+    (keydown.enter)="markAsRead(notification)"
+    (keydown.space)="
+      $event.preventDefault();
+      markAsRead(notification)
+    "
+  >
+
+    <!-- ICON -->
+    <div class="notification-icon">
+      <mat-icon>
+        {{ getNotificationIcon(notification.type) }}
+      </mat-icon>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="notification-content">
+
+      <div class="notification-title-row">
+
+        <h3>
+          {{ notification.title }}
+        </h3>
+
+        <span
+          class="unread-label"
+          *ngIf="!notification.isRead">
+          New
+        </span>
+
+      </div>
+
+      <p>
+        {{ notification.message }}
+      </p>
+
+      <small>
+        <mat-icon>schedule</mat-icon>
+
+        {{ notification.createdAt | date:'dd MMM yyyy, HH:mm' }}
+      </small>
+
+    </div>
+
+    <!-- UNREAD INDICATOR -->
+    <div
+      class="unread-dot"
+      *ngIf="!notification.isRead">
+    </div>
+
+    <!-- DELETE BUTTON -->
+    <button
+      mat-icon-button
+      type="button"
+      class="delete-button"
+      aria-label="Delete notification"
+      title="Delete notification"
+      (click)="deleteNotification(notification, $event)"
+      (keydown.enter)="deleteNotification(notification, $event)"
+      (keydown.space)="deleteNotification(notification, $event)"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+
+  </div>
+
+
+  <!-- EMPTY STATE -->
+  <div
+    class="empty-state"
+    *ngIf="notifications.length === 0">
+
+    <div class="empty-icon">
+      <mat-icon>notifications_none</mat-icon>
+    </div>
+
+    <h3>No notifications</h3>
+
+    <p>
+      You're all caught up.
+    </p>
+
+  </div>
+
+</div>
+
+  </div>
+
+</div>

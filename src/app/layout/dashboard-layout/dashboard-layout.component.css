@@ -1,0 +1,117 @@
+/* =========================================================
+   Main Application Layout
+   ========================================================= */
+
+.app-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   Sidebar
+   ========================================================= */
+
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  flex: 0 0 250px;
+
+  min-height: 100vh;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease,
+    flex-basis 0.25s ease;
+}
+
+/* Sidebar closed */
+
+.app-layout.sidebar-closed .sidebar {
+  width: 0;
+  min-width: 0;
+  flex-basis: 0;
+}
+
+/* =========================================================
+   Main Content
+   ========================================================= */
+
+.main-content {
+  flex: 1 1 auto;
+
+  min-width: 0;
+  min-height: 100vh;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   Page Content
+   ========================================================= */
+
+.page-content {
+  width: 100%;
+  min-width: 0;
+  min-height: calc(100vh - 64px);
+
+  padding: 20px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   Tablet
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .sidebar {
+    width: 230px;
+    min-width: 230px;
+    flex-basis: 230px;
+  }
+
+  .app-layout.sidebar-closed .sidebar {
+    width: 0;
+    min-width: 0;
+    flex-basis: 0;
+  }
+
+  .page-content {
+    padding: 15px;
+  }
+}
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    flex-basis: 220px;
+  }
+
+  .app-layout.sidebar-closed .sidebar {
+    width: 0;
+    min-width: 0;
+    flex-basis: 0;
+  }
+
+  .page-content {
+    padding: 12px;
+  }
+}
+

@@ -1,0 +1,24 @@
+<div
+  class="app-layout"
+  [class.sidebar-closed]="!sidebarOpen">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <app-sidebar></app-sidebar>
+  </aside>
+
+  <!-- Main application area -->
+  <main class="main-content">
+
+    <!-- Navbar -->
+    <app-navbar></app-navbar>
+
+    <!-- Routed page content -->
+    <div class="page-content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </main>
+
+</div>
+

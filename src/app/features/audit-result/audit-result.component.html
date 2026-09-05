@@ -1,0 +1,590 @@
+<div class="audit-result-container">
+
+  <!-- HEADER -->
+  <div class="audit-header">
+
+    <div class="audit-header-content">
+
+      <h2>Audit Result</h2>
+
+      <a
+        class="audit-url"
+        [href]="audit.url"
+        target="_blank"
+        rel="noopener noreferrer">
+        {{ audit.url }}
+      </a>
+
+      <div class="audit-date">
+        {{ audit.createdAt | date:'dd MMM yyyy, HH:mm:ss' }}
+      </div>
+
+    </div>
+
+    <button
+      mat-icon-button
+      type="button"
+      aria-label="Close audit result"
+      (click)="close()">
+
+      <mat-icon>close</mat-icon>
+
+    </button>
+
+  </div>
+
+  <mat-divider></mat-divider>
+
+
+  <!-- SUMMARY -->
+  <div class="summary-grid">
+
+    <!-- HTTP STATUS -->
+    <mat-card class="summary-card">
+      <mat-card-content>
+
+        <div class="summary-icon">
+          <mat-icon>http</mat-icon>
+        </div>
+
+        <div class="summary-info">
+
+          <div class="summary-label">
+            HTTP Status
+          </div>
+
+          <div class="summary-value">
+            {{ audit.statusCode || '—' }}
+          </div>
+
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+
+    <!-- RESPONSE TIME -->
+    <mat-card class="summary-card">
+      <mat-card-content>
+
+        <div class="summary-icon">
+          <mat-icon>speed</mat-icon>
+        </div>
+
+        <div class="summary-info">
+
+          <div class="summary-label">
+            Response Time
+          </div>
+
+          <div class="summary-value">
+            {{ audit.responseTimeMs ?? 0 }} ms
+          </div>
+
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+
+    <!-- STATUS -->
+    <mat-card class="summary-card">
+      <mat-card-content>
+
+        <div class="summary-icon">
+          <mat-icon>
+            {{ audit.isReachable ? 'check_circle' : 'error' }}
+          </mat-icon>
+        </div>
+
+        <div class="summary-info">
+
+          <div class="summary-label">
+            Status
+          </div>
+
+          <div
+            class="summary-value"
+            [class.success]="audit.isReachable"
+            [class.failed]="!audit.isReachable">
+
+            {{ audit.isReachable ? 'Reachable' : 'Failed' }}
+
+          </div>
+
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+
+    <!-- SEO SCORE -->
+    <mat-card class="summary-card">
+      <mat-card-content>
+
+        <div class="summary-icon">
+          <mat-icon>analytics</mat-icon>
+        </div>
+
+        <div class="summary-info">
+
+          <div class="summary-label">
+            SEO Score
+          </div>
+
+          <div class="summary-value">
+            {{ getSeoScore() }}/100
+          </div>
+
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+
+  <!-- AUDIT MESSAGE -->
+  <mat-card
+    class="audit-message-card"
+    *ngIf="audit.message">
+
+    <mat-card-content>
+
+      <div class="section-title">
+
+        <mat-icon>info</mat-icon>
+
+        <span>Audit Message</span>
+
+      </div>
+
+      <p class="audit-message">
+        {{ audit.message }}
+      </p>
+
+    </mat-card-content>
+
+  </mat-card>
+
+
+  <!-- SEO ANALYSIS -->
+  <mat-card class="section-card">
+
+    <mat-card-content>
+
+      <div class="section-title">
+
+        <mat-icon>search</mat-icon>
+
+        <span>SEO Analysis</span>
+
+      </div>
+
+
+      <div class="seo-grid">
+
+        <!-- PAGE TITLE -->
+        <div class="seo-item">
+
+          <div class="seo-label">
+            Page Title
+          </div>
+
+          <div class="seo-value">
+
+            <span *ngIf="audit.title">
+              {{ audit.title }}
+            </span>
+
+            <span
+              *ngIf="!audit.title"
+              class="missing">
+              Not available
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- META DESCRIPTION -->
+        <div class="seo-item">
+
+          <div class="seo-label">
+            Meta Description
+          </div>
+
+          <div class="seo-value">
+
+            <span *ngIf="audit.metaDescription">
+              {{ audit.metaDescription }}
+            </span>
+
+            <span
+              *ngIf="!audit.metaDescription"
+              class="missing">
+              Not available
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- H1 -->
+        <div class="seo-item">
+
+          <div class="seo-label">
+            H1 Headings
+          </div>
+
+          <div class="seo-value">
+            {{ audit.h1Count ?? 0 }}
+          </div>
+
+        </div>
+
+
+        <!-- H2 -->
+        <div class="seo-item">
+
+          <div class="seo-label">
+            H2 Headings
+          </div>
+
+          <div class="seo-value">
+            {{ audit.h2Count ?? 0 }}
+          </div>
+
+        </div>
+
+
+        <!-- IMAGES -->
+        <div class="seo-item">
+
+          <div class="seo-label">
+            Images
+          </div>
+
+          <div class="seo-value">
+            {{ audit.images ?? 0 }}
+          </div>
+
+        </div>
+
+
+        <!-- IMAGES WITHOUT ALT -->
+        <div class="seo-item">
+
+          <div class="seo-label">
+            Images Without ALT
+          </div>
+
+          <div
+            class="seo-value"
+            [class.warning]="(audit.imagesWithoutAlt ?? 0) > 0">
+
+            {{ audit.imagesWithoutAlt ?? 0 }}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+
+
+  <!-- SEO RECOMMENDATIONS -->
+  <mat-card class="section-card">
+
+    <mat-card-content>
+
+      <div class="section-title">
+
+        <mat-icon>lightbulb</mat-icon>
+
+        <span>SEO Recommendations</span>
+
+      </div>
+
+
+      <div class="recommendations">
+
+        <div
+          class="recommendation"
+          *ngFor="let recommendation of getSeoRecommendations()">
+
+          <mat-icon>
+            tips_and_updates
+          </mat-icon>
+
+          <span>
+            {{ recommendation }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+
+
+  <!-- TECHNICAL DETAILS -->
+  <mat-card class="section-card">
+
+    <mat-card-content>
+
+      <div class="section-title">
+
+        <mat-icon>settings</mat-icon>
+
+        <span>Technical Details</span>
+
+      </div>
+
+
+      <div class="technical-grid">
+
+        <!-- SSL -->
+        <div class="technical-item">
+
+          <div class="technical-label">
+            SSL
+          </div>
+
+          <div class="technical-value">
+
+            <span
+              [class.success]="audit.isSslValid === true"
+              [class.failed]="audit.isSslValid === false">
+
+              {{
+                audit.isSslValid === true
+                  ? 'Valid'
+                  : audit.isSslValid === false
+                    ? 'Invalid'
+                    : 'Not available'
+              }}
+
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- HTTP VERSION -->
+        <div class="technical-item">
+
+          <div class="technical-label">
+            HTTP Version
+          </div>
+
+          <div class="technical-value">
+            {{ audit.httpVersion || 'Not available' }}
+          </div>
+
+        </div>
+
+
+        <!-- SERVER -->
+        <div class="technical-item">
+
+          <div class="technical-label">
+            Server
+          </div>
+
+          <div class="technical-value">
+            {{ audit.server || 'Not available' }}
+          </div>
+
+        </div>
+
+
+        <!-- CONTENT TYPE -->
+        <div class="technical-item">
+
+          <div class="technical-label">
+            Content Type
+          </div>
+
+          <div class="technical-value">
+            {{ audit.contentType || 'Not available' }}
+          </div>
+
+        </div>
+
+
+        <!-- CONTENT LENGTH -->
+        <div class="technical-item">
+
+          <div class="technical-label">
+            Content Length
+          </div>
+
+          <div class="technical-value">
+
+            <span
+              *ngIf="
+                audit.contentLength !== null &&
+                audit.contentLength !== undefined
+              ">
+
+              {{ audit.contentLength | number }} bytes
+
+            </span>
+
+            <span
+              *ngIf="
+                audit.contentLength === null ||
+                audit.contentLength === undefined
+              ">
+
+              Not available
+
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- REDIRECT -->
+        <div class="technical-item">
+
+          <div class="technical-label">
+            Redirect
+          </div>
+
+          <div class="technical-value">
+
+            <span
+              [class.warning]="audit.isRedirect === true">
+
+              {{ audit.isRedirect ? 'Yes' : 'No' }}
+
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- REDIRECT LOCATION -->
+        <div
+          class="technical-item"
+          *ngIf="audit.redirectLocation">
+
+          <div class="technical-label">
+            Redirect Location
+          </div>
+
+          <div class="technical-value">
+
+            <a
+              [href]="audit.redirectLocation"
+              target="_blank"
+              rel="noopener noreferrer">
+
+              {{ audit.redirectLocation }}
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+
+
+  <!-- SEO SCORE -->
+  <mat-card class="seo-score-card">
+
+    <mat-card-content>
+
+      <div class="section-title">
+
+        <mat-icon>assessment</mat-icon>
+
+        <span>SEO Score</span>
+
+      </div>
+
+
+      <div class="seo-score-content">
+
+        <div
+          class="seo-score-circle"
+          [style.background]="
+            'conic-gradient(currentColor ' +
+            getSeoScoreDegrees() +
+            'deg, #e5e7eb ' +
+            getSeoScoreDegrees() +
+            'deg)'
+          ">
+
+          <div class="seo-score-inner">
+
+            <div class="seo-score-number">
+              {{ getSeoScore() }}
+            </div>
+
+            <div class="seo-score-total">
+              / 100
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="seo-grade">
+
+          <div
+            class="seo-grade-label"
+            [ngClass]="getSeoGradeClass()">
+
+            {{ getSeoGrade() }}
+
+          </div>
+
+          <p>
+            Overall SEO performance based on the audit results.
+          </p>
+
+        </div>
+
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+
+
+  <!-- FOOTER -->
+  <div class="audit-result-footer">
+
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="close()">
+
+      <mat-icon>close</mat-icon>
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>

@@ -1,0 +1,1420 @@
+<div class="details-dialog">
+
+  <!-- HEADER -->
+  <div class="details-header">
+
+    <div class="header-info">
+
+      <div class="website-icon">
+        <mat-icon>language</mat-icon>
+      </div>
+
+      <div>
+        <h2>
+          {{ website?.name || 'Website Details' }}
+        </h2>
+
+        <a
+          *ngIf="website?.url"
+          [href]="website.url"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          {{ website.url }}
+
+        </a>
+      </div>
+
+    </div>
+
+    <button
+      mat-icon-button
+      type="button"
+      mat-dialog-close
+      matTooltip="Close"
+      aria-label="Close website details">
+
+      <mat-icon>close</mat-icon>
+
+    </button>
+
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- CONTENT -->
+  <mat-dialog-content>
+
+    <!-- LOADING -->
+    <div
+      class="loading-state"
+      *ngIf="loading">
+
+      <mat-spinner diameter="40"></mat-spinner>
+
+      <p>
+        Loading website details...
+      </p>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div *ngIf="!loading">
+
+      <!-- EMPTY HISTORY -->
+      <div
+        class="empty-history main-empty"
+        *ngIf="history.length === 0">
+
+        <mat-icon>history</mat-icon>
+
+        <h3>
+          No audit records found
+        </h3>
+
+        <p>
+          No audit history is available for
+          {{ website?.name }}.
+        </p>
+
+      </div>
+
+      <!-- WEBSITE HAS HISTORY -->
+      <div *ngIf="history.length > 0">
+
+        <!-- SUMMARY -->
+        <div class="summary-grid">
+
+          <mat-card class="summary-card">
+            <mat-card-content>
+
+              <div class="summary-icon">
+                <mat-icon>assessment</mat-icon>
+              </div>
+
+              <div class="summary-data">
+                <span>Total Audits</span>
+
+                <strong>
+                  {{ totalAudits }}
+                </strong>
+              </div>
+
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card
+            class="summary-card success-card">
+
+            <mat-card-content>
+
+              <div class="summary-icon">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+
+              <div class="summary-data">
+                <span>Success Rate</span>
+
+                <strong>
+                  {{ successRate }}%
+                </strong>
+
+                <small>
+                  {{ successfulAudits }} successful
+                </small>
+              </div>
+
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="summary-card">
+            <mat-card-content>
+
+              <div class="summary-icon">
+                <mat-icon>speed</mat-icon>
+              </div>
+
+              <div class="summary-data">
+                <span>Average Response</span>
+
+                <strong>
+                  {{ averageResponseTime }} ms
+                </strong>
+              </div>
+
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="summary-card seo-card">
+            <mat-card-content>
+
+              <div class="summary-icon">
+                <mat-icon>search</mat-icon>
+              </div>
+
+              <div class="summary-data">
+                <span>SEO Score</span>
+
+                <strong>
+                  {{ getSeoScore() }}/100
+                </strong>
+
+                <small>
+                  {{ getSeoGrade() }}
+                </small>
+              </div>
+
+            </mat-card-content>
+          </mat-card>
+
+        </div>
+
+        <!-- PERFORMANCE -->
+        <section class="section">
+
+          <div class="section-heading">
+            <mat-icon>speed</mat-icon>
+
+            <h3>
+              Performance
+            </h3>
+          </div>
+
+          <div class="performance-grid">
+
+            <div class="performance-card fastest">
+              <mat-icon>
+                keyboard_double_arrow_down
+              </mat-icon>
+
+              <div>
+                <span>Fastest</span>
+
+                <strong>
+                  {{ fastestResponseTime }} ms
+                </strong>
+              </div>
+            </div>
+
+            <div class="performance-card average">
+              <mat-icon>speed</mat-icon>
+
+              <div>
+                <span>Average</span>
+
+                <strong>
+                  {{ averageResponseTime }} ms
+                </strong>
+              </div>
+            </div>
+
+            <div class="performance-card slowest">
+              <mat-icon>
+                keyboard_double_arrow_up
+              </mat-icon>
+
+              <div>
+                <span>Slowest</span>
+
+                <strong>
+                  {{ slowestResponseTime }} ms
+                </strong>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+        <mat-divider></mat-divider>
+
+        <!-- RESPONSE TIME CHART -->
+        <mat-card class="chart-card">
+
+          <mat-card-header>
+
+            <mat-card-title>
+              Response Time Trend
+            </mat-card-title>
+
+            <mat-card-subtitle>
+              Response time across audits for
+              {{ website.name }}
+            </mat-card-subtitle>
+
+          </mat-card-header>
+
+          <mat-card-content>
+
+            <div
+              class="response-chart-container"
+              *ngIf="
+                responseChartData.datasets.length > 0
+              ">
+
+              <canvas
+                baseChart
+                [type]="'line'"
+                [data]="responseChartData"
+                [options]="responseChartOptions">
+              </canvas>
+
+            </div>
+
+            <div
+              class="empty-history"
+              *ngIf="
+                responseChartData.datasets.length === 0
+              ">
+
+              <mat-icon>show_chart</mat-icon>
+
+              <p>
+                No response-time data available.
+              </p>
+
+            </div>
+
+          </mat-card-content>
+
+        </mat-card>
+
+        <!-- SEO SCORE -->
+        <section class="seo-score-section">
+
+          <div class="seo-circle-wrapper">
+
+            <div
+              class="seo-circle"
+              [style.--score]="getSeoScore()"
+              [style.--score-color]="getSeoScoreColor()">
+
+              <div class="seo-circle-inner">
+
+                <strong>
+                  {{ getSeoScore() }}
+                </strong>
+
+                <span>/100</span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="seo-score-info">
+
+            <div class="section-heading">
+              <mat-icon>search</mat-icon>
+
+              <h3>
+                SEO Score
+              </h3>
+            </div>
+
+            <div
+              class="seo-grade"
+              [class.seo-excellent]="
+                getSeoScore() >= 80
+              "
+              [class.seo-good]="
+                getSeoScore() >= 60 &&
+                getSeoScore() < 80
+              "
+              [class.seo-warning]="
+                getSeoScore() >= 40 &&
+                getSeoScore() < 60
+              "
+              [class.seo-poor]="
+                getSeoScore() < 40
+              ">
+
+              {{ getSeoGrade() }}
+
+            </div>
+
+            <p>
+              Score based on page structure,
+              metadata, headings and image
+              accessibility.
+            </p>
+
+          </div>
+
+        </section>
+
+        <mat-divider></mat-divider>
+
+        <!-- LATEST AUDIT -->
+        <section
+          class="section"
+          *ngIf="latestAudit">
+
+          <div class="section-heading">
+            <mat-icon>history</mat-icon>
+
+            <h3>
+              Latest Audit
+            </h3>
+          </div>
+
+          <mat-card class="latest-audit-card">
+
+            <mat-card-content>
+
+              <div class="audit-header">
+
+                <div>
+
+                  <strong>
+                    {{ latestAudit.url }}
+                  </strong>
+
+                  <span>
+                    {{
+                      latestAuditCreatedAt
+                        | date:'dd MMM yyyy, HH:mm:ss'
+                    }}
+                  </span>
+
+                </div>
+
+                <mat-chip
+                  *ngIf="latestAudit.isReachable"
+                  class="success-chip">
+
+                  <mat-icon>
+                    check_circle
+                  </mat-icon>
+
+                  Successful
+
+                </mat-chip>
+
+                <mat-chip
+                  *ngIf="!latestAudit.isReachable"
+                  class="failed-chip">
+
+                  <mat-icon>
+                    cancel
+                  </mat-icon>
+
+                  Failed
+
+                </mat-chip>
+
+              </div>
+
+              <!-- AUDIT METRICS -->
+              <div class="audit-metrics">
+
+                <div>
+                  <span>HTTP Status</span>
+
+                  <strong>
+                    {{ latestAudit.statusCode }}
+                  </strong>
+                </div>
+
+                <div>
+                  <span>Response Time</span>
+
+                  <strong>
+                    {{ latestAudit.responseTimeMs }} ms
+                  </strong>
+                </div>
+
+                <div>
+                  <span>SEO Score</span>
+
+                  <strong>
+                    {{ latestAudit.seoScore ?? 0 }}/100
+                  </strong>
+                </div>
+
+              </div>
+
+              <!-- SEO ANALYSIS -->
+              <h4 class="subsection-title">
+                SEO Analysis
+              </h4>
+
+              <div class="info-grid">
+
+                <div class="info-item">
+                  <span>Page Title</span>
+
+                  <strong>
+                    {{ latestAudit.title || 'Not found' }}
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>Meta Description</span>
+
+                  <strong
+                    [class.warning-text]="
+                      !latestAudit.metaDescription
+                    ">
+
+                    {{
+                      latestAudit.metaDescription ||
+                      'Not found'
+                    }}
+
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>H1 Headings</span>
+
+                  <strong
+                    [class.warning-text]="
+                      (latestAudit.h1Count ?? 0) === 0
+                    ">
+
+                    {{ latestAudit.h1Count ?? 0 }}
+
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>H2 Headings</span>
+
+                  <strong>
+                    {{ latestAudit.h2Count ?? 0 }}
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>Images</span>
+
+                  <strong>
+                    {{ latestAudit.images ?? 0 }}
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>Images Without ALT</span>
+
+                  <strong
+                    [class.success-text]="
+                      (latestAudit.imagesWithoutAlt ?? 0) === 0
+                    "
+                    [class.warning-text]="
+                      (latestAudit.imagesWithoutAlt ?? 0) > 0
+                    ">
+
+                    {{ latestAudit.imagesWithoutAlt ?? 0 }}
+
+                  </strong>
+                </div>
+
+              </div>
+
+              <mat-divider></mat-divider>
+
+              <!-- TECHNICAL DETAILS -->
+              <h4 class="subsection-title">
+                Technical Details
+              </h4>
+
+              <div class="info-grid">
+
+                <div class="info-item">
+                  <span>SSL</span>
+
+                  <strong
+                    [class.success-text]="
+                      latestAudit.isSslValid === true
+                    "
+                    [class.warning-text]="
+                      latestAudit.isSslValid === false
+                    ">
+
+                    {{
+                      latestAudit.isSslValid === true
+                        ? 'Valid'
+                        : latestAudit.isSslValid === false
+                          ? 'Invalid'
+                          : 'Not available'
+                    }}
+
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>HTTP Version</span>
+
+                  <strong>
+                    {{ latestAudit.httpVersion || 'N/A' }}
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>Server</span>
+
+                  <strong>
+                    {{ latestAudit.server || 'N/A' }}
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>Content Type</span>
+
+                  <strong>
+                    {{ latestAudit.contentType || 'N/A' }}
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>Content Length</span>
+
+                  <strong>
+                    {{
+                      latestAudit.contentLength !== null &&
+                      latestAudit.contentLength !== undefined
+                        ? latestAudit.contentLength + ' bytes'
+                        : 'N/A'
+                    }}
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>Redirect</span>
+
+                  <strong
+                    [class.success-text]="
+                      latestAudit.isRedirect !== true
+                    ">
+
+                    {{
+                      latestAudit.isRedirect === true
+                        ? 'Yes'
+                        : latestAudit.isRedirect === false
+                          ? 'No'
+                          : 'N/A'
+                    }}
+
+                  </strong>
+                </div>
+
+              </div>
+
+              <!-- MESSAGE -->
+              <div class="audit-message">
+
+                <mat-icon>info</mat-icon>
+
+                <div>
+
+                  <span>Audit Message</span>
+
+                  <strong>
+                    {{ latestAudit.message || 'N/A' }}
+                  </strong>
+
+                </div>
+
+              </div>
+
+            </mat-card-content>
+
+          </mat-card>
+
+        </section>
+
+        <mat-divider></mat-divider>
+
+        <!-- SEO BREAKDOWN -->
+        <div class="seo-breakdown-card">
+
+          <div class="section-title">
+
+            <mat-icon>fact_check</mat-icon>
+
+            <div>
+              <h2>
+                SEO Breakdown
+              </h2>
+
+              <p>
+                Detailed analysis of your website's SEO factors
+              </p>
+            </div>
+
+          </div>
+
+          <div class="seo-checks">
+
+            <!-- PAGE TITLE -->
+            <div class="seo-check">
+
+              <div class="seo-check-left">
+
+                <mat-icon
+                  [class.success-icon]="latestAudit?.title"
+                  [class.warning-icon]="!latestAudit?.title">
+                  title
+                </mat-icon>
+
+                <div>
+                  <strong>
+                    Page Title
+                  </strong>
+
+                  <span>
+                    {{ latestAudit?.title || 'Not found' }}
+                  </span>
+                </div>
+
+              </div>
+
+              <span
+                class="seo-status success"
+                *ngIf="latestAudit?.title">
+                Found
+              </span>
+
+              <span
+                class="seo-status warning"
+                *ngIf="!latestAudit?.title">
+                Missing
+              </span>
+
+            </div>
+
+            <!-- META DESCRIPTION -->
+            <div class="seo-check">
+
+              <div class="seo-check-left">
+
+                <mat-icon
+                  [class.success-icon]="
+                    latestAudit?.metaDescription
+                  "
+                  [class.warning-icon]="
+                    !latestAudit?.metaDescription
+                  ">
+                  description
+                </mat-icon>
+
+                <div>
+                  <strong>
+                    Meta Description
+                  </strong>
+
+                  <span>
+                    {{
+                      latestAudit?.metaDescription ||
+                      'Not found'
+                    }}
+                  </span>
+                </div>
+
+              </div>
+
+              <span
+                class="seo-status success"
+                *ngIf="latestAudit?.metaDescription">
+                Found
+              </span>
+
+              <span
+                class="seo-status warning"
+                *ngIf="!latestAudit?.metaDescription">
+                Missing
+              </span>
+
+            </div>
+
+            <!-- H1 -->
+            <div class="seo-check">
+
+              <div class="seo-check-left">
+
+                <mat-icon
+                  [class.success-icon]="
+                    (latestAudit?.h1Count ?? 0) > 0
+                  "
+                  [class.warning-icon]="
+                    (latestAudit?.h1Count ?? 0) === 0
+                  ">
+                  format_size
+                </mat-icon>
+
+                <div>
+                  <strong>
+                    H1 Headings
+                  </strong>
+
+                  <span>
+                    {{ latestAudit?.h1Count ?? 0 }}
+                  </span>
+                </div>
+
+              </div>
+
+              <span
+                class="seo-status success"
+                *ngIf="
+                  (latestAudit?.h1Count ?? 0) > 0
+                ">
+                Good
+              </span>
+
+              <span
+                class="seo-status warning"
+                *ngIf="
+                  (latestAudit?.h1Count ?? 0) === 0
+                ">
+                Missing
+              </span>
+
+            </div>
+
+            <!-- H2 -->
+            <div class="seo-check">
+
+              <div class="seo-check-left">
+
+                <mat-icon
+                  [class.success-icon]="
+                    (latestAudit?.h2Count ?? 0) > 0
+                  "
+                  [class.warning-icon]="
+                    (latestAudit?.h2Count ?? 0) === 0
+                  ">
+                  subject
+                </mat-icon>
+
+                <div>
+                  <strong>
+                    H2 Headings
+                  </strong>
+
+                  <span>
+                    {{ latestAudit?.h2Count ?? 0 }}
+                  </span>
+                </div>
+
+              </div>
+
+              <span
+                class="seo-status success"
+                *ngIf="
+                  (latestAudit?.h2Count ?? 0) > 0
+                ">
+                Good
+              </span>
+
+              <span
+                class="seo-status warning"
+                *ngIf="
+                  (latestAudit?.h2Count ?? 0) === 0
+                ">
+                Missing
+              </span>
+
+            </div>
+
+            <!-- IMAGES -->
+            <div class="seo-check">
+
+              <div class="seo-check-left">
+
+                <mat-icon class="success-icon">
+                  image
+                </mat-icon>
+
+                <div>
+                  <strong>
+                    Images
+                  </strong>
+
+                  <span>
+                    {{ latestAudit?.images ?? 0 }}
+                  </span>
+                </div>
+
+              </div>
+
+              <span class="seo-status success">
+                Checked
+              </span>
+
+            </div>
+
+            <!-- IMAGES WITHOUT ALT -->
+            <div class="seo-check">
+
+              <div class="seo-check-left">
+
+                <mat-icon
+                  [class.success-icon]="
+                    (latestAudit?.imagesWithoutAlt ?? 0) === 0
+                  "
+                  [class.warning-icon]="
+                    (latestAudit?.imagesWithoutAlt ?? 0) > 0
+                  ">
+                  accessibility
+                </mat-icon>
+
+                <div>
+                  <strong>
+                    Images Without ALT
+                  </strong>
+
+                  <span>
+                    {{ latestAudit?.imagesWithoutAlt ?? 0 }}
+                  </span>
+                </div>
+
+              </div>
+
+              <span
+                class="seo-status success"
+                *ngIf="
+                  (latestAudit?.imagesWithoutAlt ?? 0) === 0
+                ">
+                Good
+              </span>
+
+              <span
+                class="seo-status warning"
+                *ngIf="
+                  (latestAudit?.imagesWithoutAlt ?? 0) > 0
+                ">
+                Needs Attention
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- SEO RECOMMENDATIONS -->
+        <div class="seo-recommendations-card">
+
+          <div class="recommendation-header">
+
+            <mat-icon>lightbulb</mat-icon>
+
+            <div>
+              <h2>
+                SEO Recommendations
+              </h2>
+
+              <p>
+                Recommended improvements based on your latest audit
+              </p>
+            </div>
+
+          </div>
+
+          <div
+            class="recommendation-list"
+            *ngIf="seoRecommendations.length > 0">
+
+            <div
+              class="recommendation-item"
+              *ngFor="
+                let recommendation of seoRecommendations
+              ">
+
+              <mat-icon>warning</mat-icon>
+
+              <span>
+                {{ recommendation }}
+              </span>
+
+            </div>
+
+          </div>
+
+          <div
+            class="no-recommendations"
+            *ngIf="seoRecommendations.length === 0">
+
+            <mat-icon>check_circle</mat-icon>
+
+            <span>
+              No SEO recommendations.
+              Your website looks good!
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- AUDIT HISTORY -->
+        <section class="audit-history-section">
+
+          <div class="section-header">
+
+            <div>
+
+              <h2>
+                <mat-icon>history</mat-icon>
+                Audit History
+              </h2>
+
+              <p>
+                Complete audit history for
+                {{ website.name }}
+              </p>
+
+              <p class="history-hint">
+                Click a row to see the complete audit result.
+              </p>
+
+            </div>
+
+            <div class="history-count">
+              {{ sortedHistory.length }} audits
+            </div>
+
+          </div>
+
+          <!-- FILTERS -->
+          <div class="history-controls">
+
+            <mat-form-field
+              appearance="outline"
+              class="history-search">
+
+              <mat-label>
+                Search Website
+              </mat-label>
+
+              <mat-icon matPrefix>
+                search
+              </mat-icon>
+
+              <input
+                matInput
+                [(ngModel)]="searchText"
+                (ngModelChange)="resetHistoryPage()"
+                placeholder="Search URL, status or message">
+
+              <button
+                *ngIf="searchText"
+                matSuffix
+                mat-icon-button
+                type="button"
+                aria-label="Clear search"
+                (click)="searchText = ''; resetHistoryPage()">
+
+                <mat-icon>close</mat-icon>
+
+              </button>
+
+            </mat-form-field>
+
+            <mat-form-field
+              appearance="outline"
+              class="status-filter">
+
+              <mat-label>
+                Status
+              </mat-label>
+
+              <mat-select
+                [(ngModel)]="statusFilter"
+                (ngModelChange)="resetHistoryPage()">
+
+                <mat-option value="all">
+                  All
+                </mat-option>
+
+                <mat-option value="successful">
+                  Successful
+                </mat-option>
+
+                <mat-option value="failed">
+                  Failed
+                </mat-option>
+
+              </mat-select>
+
+            </mat-form-field>
+
+            <mat-form-field
+              appearance="outline"
+              class="history-sort">
+
+              <mat-label>
+                Sort By
+              </mat-label>
+
+              <mat-select
+                [(ngModel)]="historySort"
+                (ngModelChange)="changeHistorySort()">
+
+                <mat-option value="latest">
+                  Latest
+                </mat-option>
+
+                <mat-option value="oldest">
+                  Oldest
+                </mat-option>
+
+                <mat-option value="fastest">
+                  Fastest Response
+                </mat-option>
+
+                <mat-option value="slowest">
+                  Slowest Response
+                </mat-option>
+
+              </mat-select>
+
+            </mat-form-field>
+
+          </div>
+
+          <!-- NO MATCHES -->
+          <div
+            class="empty-history"
+            *ngIf="
+              history.length > 0 &&
+              sortedHistory.length === 0
+            ">
+
+            <mat-icon>
+              search_off
+            </mat-icon>
+
+            <h3>
+              No matching audit records
+            </h3>
+
+            <p>
+              Try changing the search text or status filter.
+            </p>
+
+          </div>
+
+          <!-- HISTORY TABLE -->
+          <div
+            class="history-table-container"
+            *ngIf="sortedHistory.length > 0">
+
+            <table
+              mat-table
+              [dataSource]="paginatedHistory"
+              class="history-table">
+
+              <!-- DATE -->
+              <ng-container matColumnDef="createdAt">
+
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef>
+                  Date
+                </th>
+
+                <td
+                  mat-cell
+                  *matCellDef="let audit">
+
+                  <div class="date-cell">
+
+                    <strong>
+                      {{ audit.createdAt | date:'dd MMM yyyy' }}
+                    </strong>
+
+                    <small>
+                      {{ audit.createdAt | date:'HH:mm:ss' }}
+                    </small>
+
+                  </div>
+
+                </td>
+
+              </ng-container>
+
+              <!-- HTTP STATUS -->
+              <ng-container matColumnDef="statusCode">
+
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef>
+                  HTTP
+                </th>
+
+                <td
+                  mat-cell
+                  *matCellDef="let audit">
+
+                  <span class="http-status">
+                    {{ audit.statusCode || '—' }}
+                  </span>
+
+                </td>
+
+              </ng-container>
+
+              <!-- RESPONSE -->
+              <ng-container matColumnDef="responseTimeMs">
+
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef>
+                  Response
+                </th>
+
+                <td
+                  mat-cell
+                  *matCellDef="let audit">
+
+                  <div class="response-cell">
+
+                    <strong>
+                      {{ audit.responseTimeMs ?? 0 }} ms
+                    </strong>
+
+                    <div class="response-bar">
+
+                      <div
+                        class="response-bar-fill"
+                        [style.width.%]="
+                          getResponseBarWidth(
+                            audit.responseTimeMs
+                          )
+                        ">
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+              </ng-container>
+
+              <!-- STATUS -->
+              <ng-container matColumnDef="status">
+
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef>
+                  Status
+                </th>
+
+                <td
+                  mat-cell
+                  *matCellDef="let audit">
+
+                  <span
+                    class="status-badge"
+                    [class.success]="audit.isReachable"
+                    [class.failed]="!audit.isReachable">
+
+                    <mat-icon>
+                      {{
+                        audit.isReachable
+                          ? 'check_circle'
+                          : 'error'
+                      }}
+                    </mat-icon>
+
+                    {{
+                      audit.isReachable
+                        ? 'Successful'
+                        : 'Failed'
+                    }}
+
+                  </span>
+
+                </td>
+
+              </ng-container>
+
+              <!-- MESSAGE -->
+              <ng-container matColumnDef="message">
+
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef>
+                  Message
+                </th>
+
+                <td
+                  mat-cell
+                  *matCellDef="let audit">
+
+                  <span
+                    class="message-cell"
+                    [matTooltip]="audit.message || ''">
+
+                    {{ audit.message || 'No message' }}
+
+                  </span>
+
+                </td>
+
+              </ng-container>
+
+              <!-- ACTION -->
+              <ng-container matColumnDef="action">
+
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef>
+                  Action
+                </th>
+
+                <td
+                  mat-cell
+                  *matCellDef="let audit">
+
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    matTooltip="Delete audit"
+                    type="button"
+                    aria-label="Delete audit"
+                    (click)="deleteAudit(audit, $event)">
+
+                    <mat-icon>
+                      delete
+                    </mat-icon>
+
+                  </button>
+
+                </td>
+
+              </ng-container>
+
+              <tr
+                mat-header-row
+                *matHeaderRowDef="displayedColumns">
+              </tr>
+
+              <tr
+                mat-row
+                *matRowDef="
+                  let audit;
+                  columns: displayedColumns;
+                "
+                class="history-row"
+                (click)="openAuditResult(audit)">
+              </tr>
+
+            </table>
+
+          </div>
+
+          <!-- PAGINATION -->
+          <div
+            class="history-pagination"
+            *ngIf="sortedHistory.length > 0">
+
+            <div class="pagination-info">
+
+              Showing
+
+              <strong>
+                {{
+                  ((currentHistoryPage - 1) * historyPageSize) + 1
+                }}
+              </strong>
+
+              -
+
+              <strong>
+                {{ historyDisplayEnd }}
+              </strong>
+
+              of
+
+              <strong>
+                {{ sortedHistory.length }}
+              </strong>
+
+              audits
+
+            </div>
+
+            <div class="pagination-buttons">
+
+              <button
+                mat-stroked-button
+                type="button"
+                [disabled]="currentHistoryPage === 1"
+                (click)="previousHistoryPage()">
+
+                <mat-icon>
+                  chevron_left
+                </mat-icon>
+
+                Previous
+
+              </button>
+
+              <span class="page-number">
+
+                Page
+
+                <strong>
+                  {{ currentHistoryPage }}
+                </strong>
+
+                of
+
+                <strong>
+                  {{ totalHistoryPages }}
+                </strong>
+
+              </span>
+
+              <button
+                mat-stroked-button
+                type="button"
+                [disabled]="
+                  currentHistoryPage >= totalHistoryPages
+                "
+                (click)="nextHistoryPage()">
+
+                Next
+
+                <mat-icon>
+                  chevron_right
+                </mat-icon>
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+
+  </mat-dialog-content>
+
+  <!-- FOOTER -->
+  <mat-dialog-actions align="end">
+
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="close()">
+
+      <mat-icon>
+        close
+      </mat-icon>
+
+      Close
+
+    </button>
+
+  </mat-dialog-actions>
+
+</div>

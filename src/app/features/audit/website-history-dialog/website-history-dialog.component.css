@@ -1,0 +1,362 @@
+/* =====================================================
+   HISTORY DIALOG
+===================================================== */
+
+.history-dialog {
+  padding: 24px;
+
+  background: #f8fafc;
+  color: #1e293b;
+
+  max-height: 90vh;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.dialog-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.dialog-header-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.dialog-header h2 {
+  margin: 0 0 8px;
+
+  font-size: 24px;
+  font-weight: 600;
+
+  color: #111827;
+}
+
+.website-name {
+  margin-bottom: 4px;
+
+  color: #1e293b;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.website-url {
+  display: block;
+
+  color: #4f46e5;
+
+  font-size: 13px;
+
+  text-decoration: none;
+
+  word-break: break-all;
+}
+
+.website-url:hover {
+  text-decoration: underline;
+}
+
+
+/* =====================================================
+   TABLE CONTAINER
+===================================================== */
+
+.history-table-container {
+  width: 100%;
+
+  margin-top: 20px;
+
+  overflow-x: auto;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+
+  background: #ffffff;
+}
+
+.history-table {
+  width: 100%;
+  min-width: 850px;
+}
+
+.history-table th {
+  padding: 14px 16px;
+
+  background: #f8fafc;
+
+  color: #475569;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.history-table td {
+  padding: 14px 16px;
+
+  color: #334155;
+
+  font-size: 13px;
+
+  vertical-align: middle;
+}
+
+.history-table tr {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.history-table tr:last-child {
+  border-bottom: none;
+}
+
+.history-table tr:hover {
+  background: #f8fafc;
+}
+
+
+/* =====================================================
+   HTTP STATUS
+===================================================== */
+
+.status-code {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 4px 8px;
+
+  border-radius: 6px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-code.success {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-code.warning {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.status-code.error {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+
+/* =====================================================
+   STATUS CHIP
+===================================================== */
+
+.success-chip,
+.error-chip {
+  display: inline-flex !important;
+  align-items: center;
+
+  min-height: 30px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.success-chip {
+  background: #dcfce7 !important;
+  color: #15803d !important;
+}
+
+.error-chip {
+  background: #fee2e2 !important;
+  color: #b91c1c !important;
+}
+
+.success-chip mat-icon,
+.error-chip mat-icon {
+  width: 18px;
+  height: 18px;
+
+  margin-right: 4px;
+
+  font-size: 18px;
+}
+
+
+/* =====================================================
+   SEO SCORE
+===================================================== */
+
+.seo-score {
+  color: #1e293b;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.seo-total {
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.message-cell {
+  max-width: 280px;
+
+  color: #475569;
+
+  white-space: normal;
+
+  word-break: break-word;
+
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.empty-history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 50px 20px;
+
+  text-align: center;
+
+  color: #64748b;
+}
+
+.empty-history mat-icon {
+  width: 52px;
+  height: 52px;
+
+  margin-bottom: 12px;
+
+  color: #94a3b8;
+
+  font-size: 52px;
+}
+
+.empty-history h3 {
+  margin: 0 0 8px;
+
+  color: #334155;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.empty-history p {
+  margin: 0;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 20px;
+  padding-top: 18px;
+
+  border-top: 1px solid #e2e8f0;
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+.history-table-container::-webkit-scrollbar {
+  height: 7px;
+}
+
+.history-table-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.history-table-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+
+  border-radius: 10px;
+}
+
+.history-table-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .history-dialog {
+    padding: 20px;
+  }
+
+  .dialog-header h2 {
+    font-size: 22px;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .history-dialog {
+    padding: 16px;
+  }
+
+  .dialog-header {
+    gap: 10px;
+  }
+
+  .dialog-header h2 {
+    font-size: 20px;
+  }
+
+  .website-name {
+    font-size: 15px;
+  }
+
+  .website-url {
+    font-size: 12px;
+  }
+
+  .history-table {
+    min-width: 800px;
+  }
+
+  .dialog-footer {
+    margin-top: 16px;
+  }
+}

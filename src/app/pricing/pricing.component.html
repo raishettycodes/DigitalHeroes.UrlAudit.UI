@@ -1,0 +1,169 @@
+<div class="pricing-page">
+
+  <!-- Header -->
+  <div class="pricing-header">
+
+    <h1>Choose Your Plan</h1>
+
+    <p>
+      Select the plan that fits your website auditing needs.
+    </p>
+
+  </div>
+
+
+  <!-- Loading -->
+  <div
+    *ngIf="loading"
+    class="loading-container">
+
+    <mat-spinner diameter="45"></mat-spinner>
+
+    <p>Loading plans...</p>
+
+  </div>
+
+
+  <!-- Error -->
+  <div
+    *ngIf="!loading && errorMessage"
+    class="error-message">
+
+    <mat-icon>error</mat-icon>
+
+    <p>{{ errorMessage }}</p>
+
+  </div>
+
+
+  <!-- Plans -->
+  <div
+    *ngIf="!loading && !errorMessage"
+    class="plans-grid">
+
+    <mat-card
+      *ngFor="let plan of plans"
+      class="plan-card"
+      [class.current-plan]="isCurrentPlan(plan)">
+
+
+      <!-- Current Plan Badge -->
+      <div
+        *ngIf="isCurrentPlan(plan)"
+        class="current-badge">
+
+        CURRENT PLAN
+
+      </div>
+
+
+      <!-- Plan Header -->
+      <mat-card-header>
+
+        <mat-card-title>
+          {{ plan.name }}
+        </mat-card-title>
+
+        <mat-card-subtitle>
+          {{ getPlanDescription(plan) }}
+        </mat-card-subtitle>
+
+      </mat-card-header>
+
+
+      <!-- Plan Content -->
+      <mat-card-content>
+
+        <div class="price">
+
+          <span class="currency">₹</span>
+
+          <span class="amount">
+            {{ plan.monthlyPrice }}
+          </span>
+
+          <span class="period">
+            /month
+          </span>
+
+        </div>
+
+
+        <div class="features">
+
+          <div class="feature">
+
+            <mat-icon>check_circle</mat-icon>
+
+            <span>
+              {{
+                plan.monthlyAuditLimit === -1
+                  ? 'Unlimited audits'
+                  : (plan.monthlyAuditLimit | number) + ' audits/month'
+              }}
+            </span>
+
+          </div>
+
+
+          <div class="feature">
+
+            <mat-icon>check_circle</mat-icon>
+
+            <span>SEO analysis</span>
+
+          </div>
+
+
+          <div class="feature">
+
+            <mat-icon>check_circle</mat-icon>
+
+            <span>Website monitoring</span>
+
+          </div>
+
+
+          <div class="feature">
+
+            <mat-icon>check_circle</mat-icon>
+
+            <span>Audit history</span>
+
+          </div>
+
+
+        </div>
+
+      </mat-card-content>
+
+
+      <!-- Button -->
+      <mat-card-actions>
+    <button
+       mat-raised-button
+  class="plan-button"
+  [disabled]="
+    isCurrentPlan(plan) ||
+    upgradingPlan === plan.name
+  "
+  (click)="selectPlan(plan)">
+
+  <span *ngIf="upgradingPlan !== plan.name">
+       {{ getButtonText(plan) }}
+      </span>
+
+      <span *ngIf="upgradingPlan === plan.name">
+       Updating...
+      </span>
+
+</button>
+
+      </mat-card-actions>
+
+
+    </mat-card>
+
+  </div>
+
+</div>

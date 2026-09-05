@@ -1,0 +1,383 @@
+<div class="websites-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+
+    <div>
+      <h1>
+        <mat-icon>language</mat-icon>
+        Websites
+      </h1>
+
+      <p>
+        Manage your websites and audit configuration.
+      </p>
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      [disabled]="saving || auditing"
+      (click)="startAdd()">
+
+      <mat-icon>add</mat-icon>
+      Add Website
+
+    </button>
+
+  </div>
+
+
+  <!-- ADD / EDIT FORM -->
+  <div
+    class="website-form-card"
+    *ngIf="showForm">
+
+    <div class="form-header">
+
+      <div>
+        <h2>
+          {{
+            editingId !== null
+              ? 'Edit Website'
+              : 'Add Website'
+          }}
+        </h2>
+
+        <p>
+          {{
+            editingId !== null
+              ? 'Update website information.'
+              : 'Add a website to your audit list.'
+          }}
+        </p>
+      </div>
+
+      <button
+        mat-icon-button
+        type="button"
+        matTooltip="Close"
+        aria-label="Close website form"
+        [disabled]="saving"
+        (click)="cancelForm()">
+
+        <mat-icon>close</mat-icon>
+
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <!-- WEBSITE NAME -->
+      <div class="form-field">
+
+        <label for="websiteName">
+          Website Name
+        </label>
+
+        <input
+          id="websiteName"
+          type="text"
+          [(ngModel)]="websiteName"
+          placeholder="e.g. Google"
+          autocomplete="off">
+
+      </div>
+
+
+      <!-- WEBSITE URL -->
+      <div class="form-field">
+
+        <label for="websiteUrl">
+          Website URL
+        </label>
+
+        <input
+          id="websiteUrl"
+          type="url"
+          [(ngModel)]="websiteUrl"
+          placeholder="https://www.google.com"
+          autocomplete="url">
+
+      </div>
+
+
+      <!-- ACTIVE -->
+      <div
+        class="active-field"
+        *ngIf="editingId !== null">
+
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="isActive">
+
+          Active Website
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <!-- FORM ACTIONS -->
+    <div class="form-actions">
+
+      <button
+        mat-stroked-button
+        type="button"
+        [disabled]="saving"
+        (click)="cancelForm()">
+
+        Cancel
+
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        [disabled]="saving"
+        (click)="saveWebsite()">
+
+        <mat-icon>
+          {{ editingId !== null ? 'save' : 'add' }}
+        </mat-icon>
+
+        {{
+          saving
+            ? 'Saving...'
+            : editingId !== null
+              ? 'Update Website'
+              : 'Add Website'
+        }}
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- SEARCH -->
+  <div class="search-section">
+
+    <div class="search-box">
+
+      <mat-icon>search</mat-icon>
+
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Search websites..."
+        aria-label="Search websites">
+
+      <button
+        *ngIf="searchText"
+        mat-icon-button
+        type="button"
+        aria-label="Clear search"
+        (click)="searchText = ''">
+
+        <mat-icon>close</mat-icon>
+
+      </button>
+
+    </div>
+
+    <span class="website-count">
+
+      {{ filteredWebsites.length }}
+
+      {{
+        filteredWebsites.length === 1
+          ? 'website'
+          : 'websites'
+      }}
+
+    </span>
+
+  </div>
+
+
+  <!-- LOADING -->
+  <div
+    class="loading-state"
+    *ngIf="loading">
+
+    <mat-spinner diameter="40"></mat-spinner>
+
+    <p>
+      Loading websites...
+    </p>
+
+  </div>
+
+
+  <!-- EMPTY -->
+  <div
+    class="empty-state"
+    *ngIf="
+      !loading &&
+      filteredWebsites.length === 0
+    ">
+
+    <mat-icon>language</mat-icon>
+
+    <h2>
+      {{
+        searchText
+          ? 'No websites found'
+          : 'No websites yet'
+      }}
+    </h2>
+
+    <p>
+      {{
+        searchText
+          ? 'Try a different search.'
+          : 'Add your first website to start auditing.'
+      }}
+    </p>
+
+    <button
+      *ngIf="!searchText"
+      mat-raised-button
+      color="primary"
+      type="button"
+      [disabled]="auditing"
+      (click)="startAdd()">
+
+      <mat-icon>add</mat-icon>
+      Add Website
+
+    </button>
+
+  </div>
+
+
+  <!-- WEBSITE GRID -->
+  <div
+    class="website-grid"
+    *ngIf="
+      !loading &&
+      filteredWebsites.length > 0
+    ">
+
+    <div
+      class="website-card"
+      *ngFor="let website of filteredWebsites">
+
+      <!-- CARD HEADER -->
+      <div class="website-card-header">
+
+        <div class="website-icon">
+          <mat-icon>language</mat-icon>
+        </div>
+
+        <div class="website-info">
+
+          <h3>
+            {{ website.name }}
+          </h3>
+
+          <a
+            [href]="website.url"
+            target="_blank"
+            rel="noopener noreferrer">
+
+            {{ website.url }}
+
+          </a>
+
+        </div>
+
+
+        <!-- STATUS -->
+        <div class="website-status">
+
+          <span
+            class="status-badge"
+            [class.active]="website.isActive"
+            [class.inactive]="!website.isActive">
+
+            <mat-icon>
+              {{
+                website.isActive
+                  ? 'check_circle'
+                  : 'pause_circle'
+              }}
+            </mat-icon>
+
+            {{
+              website.isActive
+                ? 'Active'
+                : 'Inactive'
+            }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- CARD ACTIONS -->
+      <div class="website-card-actions">
+
+        <button
+          mat-stroked-button
+          color="primary"
+          type="button"
+          [disabled]="
+            !website.isActive ||
+            auditing
+          "
+          (click)="auditWebsite(website)">
+
+          <mat-icon>search</mat-icon>
+
+          {{
+            auditing
+              ? 'Auditing...'
+              : 'Audit'
+          }}
+
+        </button>
+
+
+        <button
+          mat-icon-button
+          type="button"
+          matTooltip="Edit website"
+          aria-label="Edit website"
+          [disabled]="saving || auditing"
+          (click)="startEdit(website)">
+
+          <mat-icon>edit</mat-icon>
+
+        </button>
+
+
+        <button
+          mat-icon-button
+          type="button"
+          matTooltip="Delete website"
+          aria-label="Delete website"
+          [disabled]="saving || auditing"
+          (click)="deleteWebsite(website)">
+
+          <mat-icon>delete</mat-icon>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

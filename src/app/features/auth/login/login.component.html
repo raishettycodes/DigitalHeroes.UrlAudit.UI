@@ -1,0 +1,53 @@
+<div class="login-container">
+
+  <h2>Login</h2>
+
+  <form
+    #loginForm="ngForm"
+    (ngSubmit)="login()">
+
+    <div>
+      <label for="email">
+        Email
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        name="email"
+        [(ngModel)]="email"
+        placeholder="Enter email"
+        autocomplete="email"
+        required>
+    </div>
+
+    <div>
+      <label for="password">
+        Password
+      </label>
+
+      <input
+        id="password"
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        placeholder="Enter password"
+        autocomplete="current-password"
+        required>
+    </div>
+
+    <div
+      class="error-message"
+      *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="loading || loginForm.invalid">
+      {{ loading ? 'Logging in...' : 'Login' }}
+    </button>
+
+  </form>
+
+</div>

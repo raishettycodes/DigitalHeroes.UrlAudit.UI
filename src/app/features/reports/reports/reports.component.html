@@ -1,0 +1,389 @@
+<div class="reports-page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Reports</h1>
+
+      <p>
+        Audit performance and website analysis reports.
+      </p>
+    </div>
+
+    <div class="export-buttons">
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        [disabled]="loading || history.length === 0"
+        (click)="exportCsv">
+
+        <mat-icon>download</mat-icon>
+
+        Export CSV
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        [disabled]="loading || history.length === 0"
+        (click)="exportPdf()">
+
+        <mat-icon>picture_as_pdf</mat-icon>
+
+        PDF
+      </button>
+
+    </div>
+
+  </div>
+
+  <div
+    class="loading"
+    *ngIf="loading">
+
+    <mat-spinner
+      diameter="40">
+    </mat-spinner>
+
+    <p>
+      Loading reports...
+    </p>
+
+  </div>
+
+  <div
+    class="report-content"
+    *ngIf="!loading && statistics">
+
+    <div class="statistics-grid">
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          <mat-icon>analytics</mat-icon>
+        </div>
+
+        <div>
+          <span>Total Audits</span>
+
+          <h2>
+            {{ statistics.totalAudits }}
+          </h2>
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+
+        <div>
+          <span>Successful</span>
+
+          <h2>
+            {{ statistics.successfulAudits }}
+          </h2>
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          <mat-icon>error</mat-icon>
+        </div>
+
+        <div>
+          <span>Failed</span>
+
+          <h2>
+            {{ statistics.failedAudits }}
+          </h2>
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          <mat-icon>speed</mat-icon>
+        </div>
+
+        <div>
+          <span>Average Response</span>
+
+          <h2>
+            {{ statistics.averageResponseTimeMs }} ms
+          </h2>
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          <mat-icon>search</mat-icon>
+        </div>
+
+        <div>
+          <span>Average SEO Score</span>
+
+          <h2>
+            {{ getAverageSeoScore() }}/100
+          </h2>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="report-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Success Rate</h2>
+
+          <p>
+            Percentage of audits completed successfully.
+          </p>
+        </div>
+
+        <mat-icon>
+          trending_up
+        </mat-icon>
+
+      </div>
+
+      <div class="success-rate">
+
+        <div class="rate-number">
+          {{ successRate }}%
+        </div>
+
+        <div class="rate-bar">
+
+          <div
+            class="rate-fill"
+            [style.width.%]="successRate">
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="report-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>SEO Overview</h2>
+
+          <p>
+            Average SEO performance across recent audits.
+          </p>
+        </div>
+
+        <mat-icon>
+          search
+        </mat-icon>
+
+      </div>
+
+      <div class="seo-overview">
+
+        <div class="seo-score">
+
+          <strong>
+            {{ getAverageSeoScore() }}
+          </strong>
+
+          <span>/ 100</span>
+
+        </div>
+
+        <div class="seo-label">
+          {{ getSeoLabel(getAverageSeoScore()) }}
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="report-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Audit Report</h2>
+
+          <p>
+            Recent website audit activity.
+          </p>
+        </div>
+
+        <mat-icon>
+          history
+        </mat-icon>
+
+      </div>
+
+      <div
+        class="table-responsive"
+        *ngIf="history.length > 0">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Website</th>
+              <th>Status</th>
+              <th>HTTP</th>
+              <th>Response</th>
+              <th>SEO Score</th>
+              <th>SSL</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr
+              *ngFor="let audit of history">
+
+              <td>
+
+                <div class="website-cell">
+
+                  <mat-icon>
+                    language
+                  </mat-icon>
+
+                  <span>
+                    {{ audit.url }}
+                  </span>
+
+                </div>
+
+              </td>
+
+              <td>
+
+                <span
+                  class="status"
+                  [class.success]="audit.isReachable"
+                  [class.failed]="!audit.isReachable">
+
+                  {{
+                    audit.isReachable
+                      ? 'Successful'
+                      : 'Failed'
+                  }}
+
+                </span>
+
+              </td>
+
+              <td>
+                {{ audit.statusCode }}
+              </td>
+
+              <td>
+                {{ audit.responseTimeMs }} ms
+              </td>
+
+              <td>
+
+                <span
+                  class="seo-score-badge"
+                  [class.good]="
+                    (audit.seoScore ?? 0) >= 60
+                  "
+                  [class.warning]="
+                    (audit.seoScore ?? 0) >= 40 &&
+                    (audit.seoScore ?? 0) < 60
+                  "
+                  [class.poor]="
+                    (audit.seoScore ?? 0) < 40
+                  ">
+
+                  {{ audit.seoScore ?? 'N/A' }}
+
+                </span>
+
+              </td>
+
+              <td>
+
+                <span
+                  class="ssl-status"
+                  [class.ssl-valid]="
+                    audit.isSslValid === true
+                  "
+                  [class.ssl-invalid]="
+                    audit.isSslValid === false
+                  ">
+
+                  <mat-icon>
+                    {{
+                      audit.isSslValid === true
+                        ? 'lock'
+                        : audit.isSslValid === false
+                          ? 'lock_open'
+                          : 'help_outline'
+                    }}
+                  </mat-icon>
+
+                  {{
+                    audit.isSslValid === true
+                      ? 'Valid'
+                      : audit.isSslValid === false
+                        ? 'Invalid'
+                        : 'Unknown'
+                  }}
+
+                </span>
+
+              </td>
+
+              <td>
+                {{
+                  audit.createdAt
+                    | date:'dd MMM yyyy, HH:mm'
+                }}
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <div
+        class="empty-state"
+        *ngIf="history.length === 0">
+
+        <mat-icon>
+          assessment
+        </mat-icon>
+
+        <p>
+          No audit records available.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

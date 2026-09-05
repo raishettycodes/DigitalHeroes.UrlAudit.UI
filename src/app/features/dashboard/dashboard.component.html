@@ -1,0 +1,560 @@
+<div class="dashboard-main">
+
+  <div class="dashboard-container">
+
+    <!-- ===================================================== -->
+    <!-- PAGE HEADER -->
+    <!-- ===================================================== -->
+
+    <div class="dashboard-header">
+
+      <div class="header-left">
+        <h2>Dashboard</h2>
+
+        <p>
+          Monitor your website audit activity and performance.
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- STATISTICS -->
+    <!-- ===================================================== -->
+
+    <div class="row g-3 mb-4">
+
+      <div class="col-md-3">
+        <div class="card shadow-sm statistics-card">
+          <div class="card-body">
+
+            <div class="stat-icon">
+              <mat-icon>analytics</mat-icon>
+            </div>
+
+            <div>
+              <h5>Total Audits</h5>
+              <h2>{{ totalAudits }}</h2>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="card shadow-sm statistics-card">
+          <div class="card-body">
+
+            <div class="stat-icon">
+              <mat-icon>check_circle</mat-icon>
+            </div>
+
+            <div>
+              <h5>Successful</h5>
+              <h2>{{ successfulAudits }}</h2>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="card shadow-sm statistics-card">
+          <div class="card-body">
+
+            <div class="stat-icon">
+              <mat-icon>error</mat-icon>
+            </div>
+
+            <div>
+              <h5>Failed</h5>
+              <h2>{{ failedAudits }}</h2>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="card shadow-sm statistics-card">
+          <div class="card-body">
+
+            <div class="stat-icon">
+              <mat-icon>speed</mat-icon>
+            </div>
+
+            <div>
+              <h5>Avg Response</h5>
+              <h2>{{ averageTime }} ms</h2>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- AUDIT WEBSITE -->
+    <!-- ===================================================== -->
+
+    <div class="card shadow-sm mb-4">
+
+      <div class="card-body">
+
+        <div class="card-heading">
+
+          <div>
+            <h4>Audit Website</h4>
+
+            <p>
+              Enter a website URL to run a new audit.
+            </p>
+          </div>
+
+          <mat-icon>language</mat-icon>
+
+        </div>
+
+
+        <div class="row g-2">
+
+          <div class="col-md-10">
+
+            <input
+              type="url"
+              class="form-control"
+              [(ngModel)]="url"
+              placeholder="https://example.com"
+              autocomplete="url"
+              (keyup.enter)="auditWebsite()">
+
+          </div>
+
+
+          <div class="col-md-2">
+
+            <button
+              mat-raised-button
+              color="primary"
+              class="w-100 audit-button"
+              type="button"
+              (click)="auditWebsite()"
+              [disabled]="loading">
+
+              <mat-spinner
+                *ngIf="loading"
+                diameter="20">
+              </mat-spinner>
+
+              <span *ngIf="!loading">
+                Audit
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- LATEST AUDIT RESULT -->
+    <!-- ===================================================== -->
+
+    <div
+      class="card shadow-sm mb-4 latest-result"
+      *ngIf="result">
+
+      <div class="card-body">
+
+        <div class="card-heading">
+
+          <div>
+            <h4>Latest Audit Result</h4>
+
+            <p>
+              Result from your most recent audit.
+            </p>
+          </div>
+
+          <mat-icon>task_alt</mat-icon>
+
+        </div>
+
+
+        <div class="result-grid">
+
+          <div class="result-item">
+            <span>Website</span>
+            <strong>{{ result.url }}</strong>
+          </div>
+
+
+          <div class="result-item">
+            <span>HTTP Status</span>
+            <strong>
+              HTTP {{ result.statusCode }}
+            </strong>
+          </div>
+
+
+          <div class="result-item">
+            <span>Response Time</span>
+            <strong>
+              {{ result.responseTimeMs }} ms
+            </strong>
+          </div>
+
+
+          <div class="result-item">
+            <span>SEO Score</span>
+            <strong>
+              {{ result.seoScore ?? 0 }}/100
+            </strong>
+          </div>
+
+
+          <div class="result-item result-message">
+            <span>Message</span>
+            <strong>
+              {{ result.message }}
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- SEARCH -->
+    <!-- ===================================================== -->
+
+    <div class="audit-search">
+
+      <mat-icon>search</mat-icon>
+
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        (ngModelChange)="onSearch()"
+        placeholder="Search website"
+        aria-label="Search website">
+
+      <button
+        *ngIf="searchText"
+        mat-icon-button
+        type="button"
+        matTooltip="Clear search"
+        aria-label="Clear search"
+        (click)="clearSearch()">
+
+        <mat-icon>close</mat-icon>
+
+      </button>
+
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- PERFORMANCE -->
+    <!-- ===================================================== -->
+
+    <section class="performance-section">
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>
+            <mat-icon>speed</mat-icon>
+            Performance
+          </h2>
+
+          <p>
+            Response time across recent audits
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="chart-card">
+
+        <div
+          class="chart-container"
+          *ngIf="history.length > 0">
+
+          <canvas
+            baseChart
+            [type]="'line'"
+            [data]="responseChartData"
+            [options]="responseChartOptions">
+          </canvas>
+
+        </div>
+
+
+        <div
+          class="empty-chart"
+          *ngIf="history.length === 0">
+
+          <mat-icon>show_chart</mat-icon>
+
+          <p>
+            No performance data available yet.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================== -->
+    <!-- RECENT AUDITS -->
+    <!-- ===================================================== -->
+
+    <section class="recent-audits">
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>
+            <mat-icon>history</mat-icon>
+            Recent Audits
+          </h2>
+
+          <p>
+            Latest website audit activity
+          </p>
+
+        </div>
+
+
+        <span class="audit-count">
+          {{ totalAudits }} audits
+        </span>
+
+      </div>
+
+
+      <!-- LOADING -->
+
+      <div
+        class="loading-state"
+        *ngIf="loading">
+
+        <mat-spinner diameter="35"></mat-spinner>
+
+        <span>
+          Loading audits...
+        </span>
+
+      </div>
+
+
+      <!-- EMPTY -->
+
+      <div
+        class="empty-state"
+        *ngIf="
+          !loading &&
+          filteredHistory.length === 0
+        ">
+
+        <mat-icon>history</mat-icon>
+
+        <h3>No audits found</h3>
+
+        <p>
+          Start an audit to see your results here.
+        </p>
+
+      </div>
+
+
+      <!-- TABLE -->
+
+      <div
+        class="audit-table-container"
+        *ngIf="
+          !loading &&
+          filteredHistory.length > 0
+        ">
+
+        <table class="audit-table">
+
+          <thead>
+
+            <tr>
+              <th>Website</th>
+              <th>HTTP</th>
+              <th>Response</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            <tr
+              *ngFor="let audit of filteredHistory"
+              class="audit-row"
+              (click)="viewAudit(audit)">
+
+              <!-- WEBSITE -->
+
+              <td>
+
+                <div class="website-cell">
+
+                  <mat-icon>language</mat-icon>
+
+                  <span>
+                    {{ audit.url }}
+                  </span>
+
+                </div>
+
+              </td>
+
+
+              <!-- HTTP -->
+
+              <td>
+
+                <span class="http-status">
+                  {{ audit.statusCode }}
+                </span>
+
+              </td>
+
+
+              <!-- RESPONSE -->
+
+              <td>
+
+                <strong>
+                  {{ audit.responseTimeMs }} ms
+                </strong>
+
+              </td>
+
+
+              <!-- STATUS -->
+
+              <td>
+
+                <span
+                  class="status-badge"
+                  [class.success]="audit.isReachable"
+                  [class.failed]="!audit.isReachable">
+
+                  <mat-icon>
+                    {{
+                      audit.isReachable
+                        ? 'check_circle'
+                        : 'error'
+                    }}
+                  </mat-icon>
+
+                  {{
+                    audit.isReachable
+                      ? 'Successful'
+                      : 'Failed'
+                  }}
+
+                </span>
+
+              </td>
+
+
+              <!-- DATE -->
+
+              <td>
+
+                <div class="date-cell">
+
+                  <strong>
+                    {{
+                      audit.createdAt
+                        | date:'dd MMM yyyy'
+                    }}
+                  </strong>
+
+                  <small>
+                    {{
+                      audit.createdAt
+                        | date:'HH:mm:ss'
+                    }}
+                  </small>
+
+                </div>
+
+              </td>
+
+
+              <!-- ACTION -->
+
+              <td>
+
+                <button
+                  mat-icon-button
+                  type="button"
+                  matTooltip="Delete audit"
+                  aria-label="Delete audit"
+                  (click)="
+                    deleteAudit(audit.id);
+                    $event.stopPropagation()
+                  ">
+
+                  <mat-icon>delete</mat-icon>
+
+                </button>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <!-- PAGINATION -->
+
+      <mat-paginator
+        [length]="totalAudits"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizes"
+        [pageIndex]="currentPage - 1"
+        showFirstLastButtons
+        (page)="onPageChange($event)">
+      </mat-paginator>
+
+    </section>
+
+  </div>
+
+</div>

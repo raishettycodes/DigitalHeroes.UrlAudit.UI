@@ -1,0 +1,309 @@
+<div class="history-dialog">
+
+  <!-- HEADER -->
+  <div class="dialog-header">
+
+    <div class="dialog-header-content">
+
+      <h2 mat-dialog-title>
+        Audit History
+      </h2>
+
+      <div class="website-name">
+        {{ data.website.name || 'Website' }}
+      </div>
+
+      <a
+        class="website-url"
+        [href]="data.website.url"
+        target="_blank"
+        rel="noopener noreferrer">
+
+        {{ data.website.url }}
+
+      </a>
+
+    </div>
+
+    <button
+      mat-icon-button
+      type="button"
+      aria-label="Close audit history"
+      (click)="close()">
+
+      <mat-icon>close</mat-icon>
+
+    </button>
+
+  </div>
+
+
+  <!-- EMPTY STATE -->
+  <div
+    class="empty-history"
+    *ngIf="data.history.length === 0">
+
+    <mat-icon>
+      history
+    </mat-icon>
+
+    <h3>No Audit History</h3>
+
+    <p>
+      No audit records are available for this website.
+    </p>
+
+  </div>
+
+
+  <!-- HISTORY TABLE -->
+  <div
+    class="history-table-container"
+    *ngIf="data.history.length > 0">
+
+    <table
+      mat-table
+      [dataSource]="data.history"
+      class="history-table">
+
+
+      <!-- DATE -->
+      <ng-container matColumnDef="createdAt">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Date
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let audit">
+
+          {{ audit.createdAt | date:'dd MMM yyyy, HH:mm:ss' }}
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- HTTP STATUS -->
+      <ng-container matColumnDef="statusCode">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          HTTP
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let audit">
+
+          <span
+            class="status-code"
+            [class.success]="
+              audit.statusCode >= 200 &&
+              audit.statusCode < 300
+            "
+            [class.warning]="
+              audit.statusCode >= 300 &&
+              audit.statusCode < 400
+            "
+            [class.error]="
+              audit.statusCode >= 400
+            ">
+
+            {{ audit.statusCode || '—' }}
+
+          </span>
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- RESPONSE TIME -->
+      <ng-container matColumnDef="responseTimeMs">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Response
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let audit">
+
+          {{ audit.responseTimeMs ?? 0 }} ms
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- STATUS -->
+      <ng-container matColumnDef="status">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Status
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let audit">
+
+          <mat-chip
+            [class.success-chip]="audit.isReachable"
+            [class.error-chip]="!audit.isReachable">
+
+            <mat-icon>
+              {{ audit.isReachable ? 'check_circle' : 'error' }}
+            </mat-icon>
+
+            {{ audit.isReachable ? 'Reachable' : 'Failed' }}
+
+          </mat-chip>
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- SEO SCORE -->
+      <ng-container matColumnDef="seoScore">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          SEO
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let audit">
+
+          <span class="seo-score">
+            {{ audit.seoScore ?? 0 }}
+          </span>
+
+          <span class="seo-total">
+            / 100
+          </span>
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- MESSAGE -->
+      <ng-container matColumnDef="message">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Message
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let audit"
+          class="message-cell">
+
+          {{ audit.message || '—' }}
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- ACTION -->
+      <ng-container matColumnDef="action">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Action
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let audit">
+
+          <button
+            mat-stroked-button
+            color="primary"
+            type="button"
+            matTooltip="View audit result"
+            (click)="viewAudit(audit)">
+
+            <mat-icon>
+              visibility
+            </mat-icon>
+
+            View
+
+          </button>
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- HEADER ROW -->
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns">
+      </tr>
+
+
+      <!-- DATA ROW -->
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns: displayedColumns;
+        ">
+      </tr>
+
+    </table>
+
+  </div>
+
+
+  <!-- FOOTER -->
+  <div class="dialog-footer">
+
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="close()">
+
+      <mat-icon>
+        close
+      </mat-icon>
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>

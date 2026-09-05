@@ -1,0 +1,859 @@
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.dashboard-main {
+  width: 100%;
+  min-height: 100%;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.dashboard-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 24px 30px 40px;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.header-left h2 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.header-left p {
+  margin: 6px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.dashboard-container > .row.g-3.mb-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+
+  width: 100%;
+  margin: 0 0 28px 0;
+}
+
+.dashboard-container > .row.g-3.mb-4 > .col-md-3 {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  padding: 0;
+}
+
+.statistics-card {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+
+  box-sizing: border-box;
+}
+
+.statistics-card.shadow-sm {
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.06) !important;
+}
+
+.statistics-card .card-body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  min-height: 110px;
+  padding: 22px;
+
+  box-sizing: border-box;
+}
+
+.statistics-card h5 {
+  margin: 0 0 8px;
+
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.statistics-card h2 {
+  margin: 0;
+
+  color: #111827;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  background: #eef2ff;
+}
+
+.stat-icon mat-icon {
+  color: #3f51b5;
+}
+
+
+/* =========================================================
+   GENERAL CARDS
+   ========================================================= */
+
+.card {
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.card.shadow-sm {
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.06) !important;
+}
+
+.card-body {
+  padding: 22px;
+}
+
+
+/* =========================================================
+   CARD HEADINGS
+   ========================================================= */
+
+.card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+.card-heading h4 {
+  margin: 0;
+
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.card-heading p {
+  margin: 5px 0 0;
+
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.card-heading > mat-icon {
+  color: #64748b;
+}
+
+
+/* =========================================================
+   AUDIT WEBSITE
+   ========================================================= */
+
+.form-control {
+  width: 100%;
+  min-height: 44px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  padding: 10px 14px;
+
+  font-size: 14px;
+  color: #1f2937;
+
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: #3f51b5;
+  outline: none;
+
+  box-shadow:
+    0 0 0 2px rgba(63, 81, 181, 0.12);
+}
+
+.audit-button {
+  min-height: 44px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.audit-button mat-spinner {
+  display: inline-block;
+}
+
+
+/* =========================================================
+   LATEST RESULT
+   ========================================================= */
+
+.latest-result {
+  overflow: hidden;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.result-item {
+  min-width: 0;
+
+  padding: 14px;
+
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.result-item span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.result-item strong {
+  display: block;
+
+  overflow: hidden;
+
+  color: #1f2937;
+  font-size: 14px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-message {
+  grid-column: span 4;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.audit-search {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  max-width: 500px;
+  min-height: 44px;
+
+  margin-bottom: 28px;
+  padding: 0 8px 0 14px;
+
+  background: #ffffff;
+  border: 1px solid #dfe3e8;
+  border-radius: 10px;
+
+  box-sizing: border-box;
+}
+
+.audit-search:focus-within {
+  border-color: #3f51b5;
+
+  box-shadow:
+    0 0 0 2px rgba(63, 81, 181, 0.1);
+}
+
+.audit-search > mat-icon {
+  flex-shrink: 0;
+
+  margin-right: 10px;
+
+  color: #6b7280;
+  font-size: 21px;
+}
+
+.audit-search input {
+  flex: 1;
+  min-width: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.audit-search input::placeholder {
+  color: #9ca3af;
+}
+
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.performance-section,
+.recent-audits {
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin: 0;
+
+  color: #1f2937;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.section-header h2 mat-icon {
+  width: 23px;
+  height: 23px;
+  font-size: 23px;
+}
+
+.section-header p {
+  margin: 5px 0 0;
+
+  color: #6b7280;
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   CHART
+   ========================================================= */
+
+.chart-card {
+  width: 100%;
+  min-height: 320px;
+
+  padding: 20px;
+
+  background: #ffffff;
+  border-radius: 12px;
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.06);
+
+  box-sizing: border-box;
+}
+
+.chart-container {
+  position: relative;
+
+  width: 100%;
+  height: 280px;
+}
+
+.chart-container canvas {
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.empty-chart {
+  min-height: 280px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #9ca3af;
+}
+
+.empty-chart mat-icon {
+  width: 45px;
+  height: 45px;
+
+  margin-bottom: 10px;
+
+  font-size: 45px;
+}
+
+.empty-chart p {
+  margin: 0;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   AUDIT COUNT
+   ========================================================= */
+
+.audit-count {
+  padding: 6px 12px;
+
+  background: #eef2ff;
+  border-radius: 20px;
+
+  color: #3f51b5;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-state {
+  min-height: 180px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  background: #ffffff;
+  border-radius: 12px;
+
+  color: #6b7280;
+}
+
+.loading-state span {
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.empty-state {
+  min-height: 220px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: #ffffff;
+  border-radius: 12px;
+
+  text-align: center;
+
+  box-sizing: border-box;
+}
+
+.empty-state mat-icon {
+  width: 48px;
+  height: 48px;
+
+  margin-bottom: 10px;
+
+  color: #9ca3af;
+  font-size: 48px;
+}
+
+.empty-state h3 {
+  margin: 5px 0;
+
+  color: #374151;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.empty-state p {
+  margin: 5px 0;
+
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   RECENT AUDIT TABLE
+   ========================================================= */
+
+.audit-table-container {
+  width: 100%;
+  overflow-x: auto;
+
+  background: #ffffff;
+  border-radius: 12px;
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.audit-table {
+  width: 100%;
+  min-width: 850px;
+
+  border-collapse: collapse;
+}
+
+.audit-table thead {
+  background: #f8fafc;
+}
+
+.audit-table th {
+  padding: 15px 18px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 600;
+
+  text-align: left;
+  white-space: nowrap;
+}
+
+.audit-table td {
+  padding: 16px 18px;
+
+  border-bottom: 1px solid #f0f2f5;
+
+  color: #374151;
+  font-size: 14px;
+
+  vertical-align: middle;
+}
+
+.audit-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.audit-row {
+  cursor: pointer;
+
+  transition: background 0.15s ease;
+}
+
+.audit-row:hover {
+  background: #f8fafc;
+}
+
+
+/* =========================================================
+   WEBSITE
+   ========================================================= */
+
+.website-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 200px;
+}
+
+.website-cell mat-icon {
+  flex-shrink: 0;
+
+  width: 20px;
+  height: 20px;
+
+  color: #64748b;
+  font-size: 20px;
+}
+
+.website-cell span {
+  max-width: 320px;
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   HTTP
+   ========================================================= */
+
+.http-status {
+  display: inline-block;
+
+  min-width: 40px;
+  padding: 4px 8px;
+
+  background: #f1f5f9;
+  border-radius: 5px;
+
+  text-align: center;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.status-badge.success {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.status-badge.failed {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.date-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.date-cell strong {
+  color: #374151;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.date-cell small {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   TABLE ACTION
+   ========================================================= */
+
+.audit-table button[mat-icon-button] {
+  width: 38px !important;
+  height: 38px !important;
+}
+
+.audit-table button mat-icon {
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   PAGINATOR
+   ========================================================= */
+
+mat-paginator {
+  width: 100%;
+
+  border-top: 1px solid #e5e7eb;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .dashboard-container > .row.g-3.mb-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 992px) {
+
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .result-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .result-message {
+    grid-column: span 2;
+  }
+
+  .chart-card {
+    min-height: 300px;
+  }
+
+  .chart-container {
+    height: 260px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .dashboard-container {
+    padding: 15px;
+  }
+
+  .header-left h2 {
+    font-size: 22px;
+  }
+
+  .audit-search {
+    max-width: 100%;
+  }
+
+  .chart-card {
+    padding: 12px;
+    min-height: 270px;
+  }
+
+  .chart-container {
+    height: 240px;
+  }
+
+  .section-header {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .section-header h2 {
+    font-size: 18px;
+  }
+
+  .audit-count {
+    font-size: 11px;
+    padding: 5px 9px;
+  }
+
+  .statistics-card h2 {
+    font-size: 26px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+  .dashboard-container {
+    padding: 12px;
+  }
+
+  .dashboard-container > .row.g-3.mb-4 {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .header-left h2 {
+    font-size: 20px;
+  }
+
+  .card-body {
+    padding: 16px;
+  }
+
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-message {
+    grid-column: span 1;
+  }
+
+  .section-header {
+    flex-direction: column;
+  }
+
+  .audit-count {
+    align-self: flex-start;
+  }
+
+  .chart-container {
+    height: 220px;
+  }
+
+  .empty-chart {
+    min-height: 220px;
+  }
+
+  .website-cell span {
+    max-width: 180px;
+  }
+
+}

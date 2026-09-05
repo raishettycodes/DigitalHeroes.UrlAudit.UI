@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>
+  Edit Website
+</h2>
+
+<mat-dialog-content>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Website Name</mat-label>
+
+    <input
+      matInput
+      [(ngModel)]="website.name"
+      placeholder="Enter website name">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Website URL</mat-label>
+
+    <input
+      matInput
+      [(ngModel)]="website.url"
+      placeholder="https://example.com">
+  </mat-form-field>
+
+  <mat-slide-toggle
+    [(ngModel)]="website.isActive">
+
+    Website Active
+
+  </mat-slide-toggle>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+  <button
+    mat-button
+    type="button"
+    (click)="cancel()">
+
+    Cancel
+
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="save()">
+
+    Save Changes
+
+  </button>
+
+</mat-dialog-actions>

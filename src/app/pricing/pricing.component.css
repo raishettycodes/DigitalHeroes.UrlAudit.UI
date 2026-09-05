@@ -1,0 +1,189 @@
+.pricing-page {
+  padding: 32px;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.pricing-header h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.pricing-header p {
+  margin: 0;
+  color: #666;
+  font-size: 16px;
+}
+
+.loading-container {
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+}
+
+.loading-container p {
+  color: #666;
+}
+
+.error-message {
+  min-height: 200px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #d32f2f;
+
+  text-align: center;
+}
+
+.plans-grid {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 24px;
+}
+
+.plan-card {
+  position: relative;
+
+  min-height: 430px;
+
+  padding: 20px;
+
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+}
+
+.current-plan {
+  border: 2px solid #3f51b5;
+}
+
+.current-badge {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  padding: 6px 12px;
+
+  border-radius: 0 10px 0 10px;
+
+  background: #3f51b5;
+
+  color: white;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+mat-card-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.price {
+  margin: 30px 0;
+
+  text-align: center;
+}
+
+.currency {
+  font-size: 20px;
+
+  vertical-align: top;
+}
+
+.amount {
+  font-size: 42px;
+
+  font-weight: 700;
+}
+
+.period {
+  color: #777;
+
+  font-size: 14px;
+}
+
+.features {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.feature {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  font-size: 14px;
+}
+
+.feature mat-icon {
+  width: 20px;
+  height: 20px;
+
+  font-size: 20px;
+}
+
+mat-card-actions {
+  margin-top: auto;
+
+  padding-top: 25px;
+}
+
+.plan-button {
+  width: 100%;
+
+  min-height: 44px;
+}
+
+@media (max-width: 1000px) {
+
+  .plans-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .pricing-page {
+    padding: 16px;
+  }
+
+  .pricing-header h1 {
+    font-size: 26px;
+  }
+
+  .plans-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

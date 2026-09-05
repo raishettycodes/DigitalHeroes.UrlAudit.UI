@@ -1,0 +1,102 @@
+<mat-toolbar color="primary" class="toolbar">
+
+  <!-- Sidebar -->
+  <button
+    mat-icon-button
+    type="button"
+    aria-label="Toggle sidebar"
+    matTooltip="Menu"
+    (click)="toggleSidebar()">
+
+    <mat-icon>menu</mat-icon>
+
+  </button>
+
+
+  <!-- Logo -->
+  <span class="logo">
+    DigitalHeroes URL Audit
+  </span>
+
+
+  <span class="spacer"></span>
+
+
+  <!-- Notifications -->
+  <button
+    mat-icon-button
+    type="button"
+    aria-label="Notifications"
+    matTooltip="Notifications"
+    [matBadge]="unreadCount"
+    [matBadgeHidden]="unreadCount === 0"
+    matBadgeColor="warn"
+    (click)="openNotifications()">
+
+    <mat-icon>notifications</mat-icon>
+
+  </button>
+
+
+  <!-- Dark Mode -->
+  <button
+    mat-icon-button
+    type="button"
+    aria-label="Dark mode"
+    matTooltip="Dark mode">
+
+    <mat-icon>dark_mode</mat-icon>
+
+  </button>
+
+
+  <!-- User Menu -->
+  <button
+    mat-icon-button
+    type="button"
+    aria-label="User menu"
+    matTooltip="Account"
+    [matMenuTriggerFor]="userMenu">
+
+    <mat-icon>account_circle</mat-icon>
+
+  </button>
+
+
+  <!-- User Menu -->
+  <mat-menu #userMenu="matMenu">
+
+    <button
+      mat-menu-item
+      type="button">
+
+      <mat-icon>person</mat-icon>
+      <span>Profile</span>
+
+    </button>
+
+
+    <button
+      mat-menu-item
+      type="button"
+      routerLink="/settings">
+
+      <mat-icon>settings</mat-icon>
+      <span>Settings</span>
+
+    </button>
+
+
+    <button
+      mat-menu-item
+      type="button"
+      (click)="logout()">
+
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+
+    </button>
+
+  </mat-menu>
+
+</mat-toolbar>

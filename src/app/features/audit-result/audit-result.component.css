@@ -1,0 +1,521 @@
+/* =====================================================
+   AUDIT RESULT DIALOG
+===================================================== */
+
+.audit-result-container {
+  padding: 24px;
+  background: #f8fafc;
+  color: #1e293b;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.audit-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.audit-header-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.audit-header h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.audit-url {
+  display: block;
+  max-width: 700px;
+  color: #4f46e5;
+  font-size: 14px;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.audit-url:hover {
+  text-decoration: underline;
+}
+
+.audit-date {
+  margin-top: 6px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin: 22px 0;
+}
+
+.summary-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: none !important;
+}
+
+.summary-card mat-card-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+}
+
+.summary-icon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.summary-icon mat-icon {
+  margin: 0;
+}
+
+.summary-info {
+  min-width: 0;
+}
+
+.summary-label {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.summary-value {
+  margin-top: 4px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  word-break: break-word;
+}
+
+
+/* =====================================================
+   STATUS COLORS
+===================================================== */
+
+.success {
+  color: #16a34a !important;
+}
+
+.failed {
+  color: #dc2626 !important;
+}
+
+.warning {
+  color: #d97706 !important;
+}
+
+
+/* =====================================================
+   COMMON SECTION CARD
+===================================================== */
+
+.section-card,
+.seo-score-card,
+.audit-message-card {
+  margin-top: 20px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  box-shadow: none !important;
+}
+
+.section-card mat-card-content,
+.seo-score-card mat-card-content,
+.audit-message-card mat-card-content {
+  padding: 20px;
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-bottom: 18px;
+
+  color: #111827;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.section-title mat-icon {
+  color: #4f46e5;
+}
+
+
+/* =====================================================
+   AUDIT MESSAGE
+===================================================== */
+
+.audit-message {
+  margin: 0;
+
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   SEO ANALYSIS
+===================================================== */
+
+.seo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.seo-item {
+  min-width: 0;
+
+  padding: 14px;
+
+  border-radius: 9px;
+
+  background: #f8fafc;
+}
+
+.seo-label {
+  margin-bottom: 6px;
+
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.seo-value {
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.missing {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+
+/* =====================================================
+   SEO RECOMMENDATIONS
+===================================================== */
+
+.recommendations {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recommendation {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  padding: 14px 16px;
+
+  background: #fffbeb;
+
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+
+  color: #92400e;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.recommendation mat-icon {
+  flex-shrink: 0;
+  color: #f59e0b;
+}
+
+
+/* =====================================================
+   TECHNICAL DETAILS
+===================================================== */
+
+.technical-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.technical-item {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  padding: 14px;
+
+  border-radius: 9px;
+
+  background: #f8fafc;
+}
+
+.technical-label {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.technical-value {
+  color: #1e293b;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.technical-value a {
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.technical-value a:hover {
+  text-decoration: underline;
+}
+
+
+/* =====================================================
+   SEO SCORE
+===================================================== */
+
+.seo-score-card {
+  margin-top: 20px;
+}
+
+.seo-score-content {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.seo-score-circle {
+  width: 130px;
+  height: 130px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+}
+
+.seo-score-inner {
+  width: 98px;
+  height: 98px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+}
+
+.seo-score-number {
+  color: #111827;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.seo-score-total {
+  margin-top: 4px;
+
+  color: #64748b;
+  font-size: 12px;
+}
+
+.seo-grade {
+  flex: 1;
+  min-width: 0;
+}
+
+.seo-grade-label {
+  display: inline-block;
+
+  padding: 6px 12px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.seo-excellent {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.seo-good {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.seo-warning {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.seo-poor {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.seo-grade p {
+  margin: 10px 0 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.audit-result-footer {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 24px;
+  padding-top: 18px;
+
+  border-top: 1px solid #e2e8f0;
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+.audit-result-container::-webkit-scrollbar {
+  width: 7px;
+}
+
+.audit-result-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.audit-result-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.audit-result-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .technical-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .audit-result-container {
+    padding: 16px;
+  }
+
+  .audit-header {
+    gap: 10px;
+  }
+
+  .audit-header h2 {
+    font-size: 21px;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .technical-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seo-score-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .seo-score-circle {
+    width: 130px;
+    height: 130px;
+  }
+
+  .audit-result-footer {
+    margin-top: 20px;
+  }
+}

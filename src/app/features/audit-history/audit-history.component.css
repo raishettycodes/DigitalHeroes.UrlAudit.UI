@@ -1,0 +1,132 @@
+.history-container {
+  padding: 24px;
+}
+
+.page-header {
+  margin-bottom: 20px;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.page-header p {
+  margin: 6px 0 0;
+  color: #777;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.audit-row {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.audit-row:hover {
+  background: #f7f9fc;
+}
+
+.url-cell {
+  max-width: 260px;
+}
+
+.url-cell strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.http-code {
+  font-weight: 600;
+}
+
+.seo-score {
+  font-weight: 600;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 9px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.status-badge.success {
+  color: #2e7d32;
+  background: #e8f5e9;
+}
+
+.status-badge.failed {
+  color: #c62828;
+  background: #ffebee;
+}
+
+.loading-container {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-container p {
+  margin-top: 15px;
+  color: #777;
+}
+
+.empty-state {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+}
+
+.empty-state mat-icon {
+  width: 48px;
+  height: 48px;
+  font-size: 48px;
+}
+
+.empty-state h3 {
+  margin: 15px 0 5px;
+  color: #444;
+}
+
+.empty-state p {
+  margin: 0;
+}
+
+mat-paginator {
+  border-top: 1px solid #eee;
+}
+
+@media (max-width: 800px) {
+
+  .history-container {
+    padding: 16px;
+  }
+
+  .url-cell {
+    max-width: 180px;
+  }
+}
