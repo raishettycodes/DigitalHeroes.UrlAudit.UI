@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 
 import { AuditHistory, PagedResponse } from '../models/history.model';
 
+import { environment } from '../../../environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +16,7 @@ export class HistoryService {
   private http = inject(HttpClient);
 
   private api =
-    'https://localhost:7225/api/AuditHistory';
+  `${environment.apiUrl}/api/AuditHistory`;
 
   getHistory(
     page: number,

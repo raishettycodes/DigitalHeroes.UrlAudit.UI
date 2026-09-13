@@ -5,13 +5,14 @@ import { Observable } from 'rxjs';
 import { SubscriptionPlan } from '../models/subscription-plan.model';
 import { SubscriptionUsage } from '../models/subscription-usage.model';
 import { SubscriptionUpgradeResponse } from '../models/subscription-upgrade-response.model';
+import { environment } from '../../../environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubscriptionService {
 
-  private apiBaseUrl = 'https://localhost:7225/api';
+  private apiBaseUrl = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 import { Notification } from '../models/notification.model';
-
+import { environment } from '../../../environment';
 interface UnreadCountResponse {
   count: number;
 }
@@ -14,7 +14,7 @@ interface UnreadCountResponse {
 export class NotificationService {
 
   private readonly apiUrl =
-    'https://localhost:7225/api/Notification';
+  `${environment.apiUrl}/api/Notification`;
 
   private readonly unreadCountSubject =
     new BehaviorSubject<number>(0);
