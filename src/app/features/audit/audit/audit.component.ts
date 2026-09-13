@@ -18,6 +18,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -32,6 +33,7 @@ import { AuditResultComponent } from '../../audit-result/audit-result.component'
 import { EditWebsiteDialogComponent } from '../../website/edit-website-dialog/edit-website-dialog.component';
 import { WebsiteHistoryDialogComponent } from '../website-history-dialog/website-history-dialog.component';
 import { WebsiteDetailsComponent } from '../../website-details/website-details.component';
+import { UpgradeDialogComponent } from '../../subscription/upgrade-dialog/upgrade-dialog.component';
 
 @Component({
   selector: 'app-audit',
@@ -251,17 +253,29 @@ export class AuditComponent implements OnInit {
 
           this.loading = false;
 
-          if (error.status === 403) {
-            const message =
-              error?.error?.message ||
-              'Your monthly audit limit has been reached.';
+         if (error.status === 403) {
+  const message =
+    error?.error?.message ||
+    'Your monthly audit limit has been reached.';
 
-            alert(
-              `${message}\n\nPlease upgrade your plan to continue auditing.`
-            );
+  const dialogRef = this.dialog.open(
+    UpgradeDialogComponent,
+    {
+      width: '450px',
+      data: {
+        message
+      }
+    }
+  );
 
-            return;
-          }
+  dialogRef.afterClosed().subscribe(result => {
+    if (result === 'view-plans') {
+      this.router.navigate(['/subscription']);
+    }
+  });
+
+  return;
+}
 
           if (error.status === 401) {
             alert(

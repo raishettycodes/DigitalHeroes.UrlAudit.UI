@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Monthly Audit Limit Reached</h2>
+
+<mat-dialog-content>
+  <p>
+    {{ data.message }}
+  </p>
+
+  <p>
+    Upgrade your plan to continue auditing websites and get a higher
+    monthly audit limit.
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">
+    Cancel
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="viewPlans()">
+    View Plans
+  </button>
+</mat-dialog-actions>
