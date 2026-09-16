@@ -6,6 +6,9 @@ import { SubscriptionPlan } from '../models/subscription-plan.model';
 import { SubscriptionUsage } from '../models/subscription-usage.model';
 import { SubscriptionUpgradeResponse } from '../models/subscription-upgrade-response.model';
 import { environment } from '../../../environment';
+import { CreatePaymentOrderRequest } from '../models/create-payment-order-request.model';
+import { CreatePaymentOrderResponse } from '../models/create-payment-order-response.model';
+import { VerifyPaymentRequest } from '../models/verify-payment-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +35,24 @@ export class SubscriptionService {
   return this.http.post<SubscriptionUpgradeResponse>(
     `${this.apiBaseUrl}/Subscription/upgrade`,
     { plan }
+  );
+}
+
+createPaymentOrder(
+  request: CreatePaymentOrderRequest
+): Observable<CreatePaymentOrderResponse> {
+  return this.http.post<CreatePaymentOrderResponse>(
+    `${this.apiBaseUrl}/Payment/create-order`,
+    request
+  );
+}
+
+verifyPayment(
+  request: VerifyPaymentRequest
+): Observable<any> {
+  return this.http.post(
+    `${this.apiBaseUrl}/Payment/verify`,
+    request
   );
 }
 }

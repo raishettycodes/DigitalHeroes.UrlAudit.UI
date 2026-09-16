@@ -10,6 +10,8 @@ import { SubscriptionService } from '../core/services/subscription.service';
 import { SubscriptionPlan } from '../core/models/subscription-plan.model';
 import { SubscriptionUsage } from '../core/models/subscription-usage.model';
 
+
+declare var Razorpay: any;
 @Component({
   selector: 'app-pricing',
   standalone: true,
@@ -102,32 +104,166 @@ export class PricingComponent implements OnInit {
     return 'Upgrade';
   }
 
- selectPlan(plan: SubscriptionPlan): void {
+selectPlan(plan: SubscriptionPlan): void {
 
   if (this.isCurrentPlan(plan)) {
     return;
   }
 
-  const confirmed = confirm(
-    `Are you sure you want to select the ${plan.name} plan?`
-  );
+  // Free plan does not require payment
+  if (plan.monthlyPrice === 0) {
+    this.upgradingPlan = plan.name;
 
-  if (!confirmed) {
+    this.subscriptionService.upgradePlan(plan.name).subscribe({
+      next: (response) => {
+        console.log('Subscription changed:', response);
+
+        this.upgradingPlan = '';
+
+        alert(
+          `Successfully changed to ${response.plan} plan.`
+        );
+
+        this.loadUsage();
+      },
+
+      error: (error) => {
+        console.error(
+          'Subscription change failed:',
+          error
+        );
+
+        this.upgradingPlan = '';
+
+        alert(
+          error?.error?.message ||
+          'Unable to change subscription plan.'
+        );
+      }
+    });
+
     return;
   }
 
   this.upgradingPlan = plan.name;
 
-  this.subscriptionService.upgradePlan(plan.name).subscribe({
+  this.subscriptionService.createPaymentOrder({
+    plan: plan.name
+  }).subscribe({
 
-    next: (response) => {
+    next: (order) => {
 
-      console.log('Subscription upgraded:', response);
+      console.log('Razorpay order created:', order);
+
+      const options = {
+
+        key: order.keyId,
+
+        amount: order.amount * 100,
+
+        currency: order.currency,
+
+        name: 'DigitalHeroes',
+
+        description: `${order.plan} Plan`,
+
+        order_id: order.orderId,
+
+        handler: (response: any) => {
+
+          console.log(
+            'Razorpay payment successful:',
+            response
+          );
+
+          this.verifyPayment(
+            plan.name,
+            response.razorpay_order_id,
+            response.razorpay_payment_id,
+            response.razorpay_signature
+          );
+        },
+
+        modal: {
+          ondismiss: () => {
+
+            console.log(
+              'Razorpay checkout dismissed.'
+            );
+
+            this.upgradingPlan = '';
+          }
+        },
+
+        theme: {
+          color: '#1976d2'
+        }
+      };
+
+      const razorpay = new Razorpay(options);
+
+      razorpay.on(
+        'payment.failed',
+        (response: any) => {
+
+          console.error(
+            'Razorpay payment failed:',
+            response
+          );
+
+          this.upgradingPlan = '';
+
+          alert(
+            response?.error?.description ||
+            'Payment failed. Please try again.'
+          );
+        }
+      );
+
+      razorpay.open();
+    },
+
+    error: (error) => {
+
+      console.error(
+        'Failed to create Razorpay order:',
+        error
+      );
 
       this.upgradingPlan = '';
 
       alert(
-        `Successfully changed to ${response.plan} plan.`
+        error?.error?.message ||
+        'Unable to start payment. Please try again.'
+      );
+    }
+  });
+}
+private verifyPayment(
+  plan: string,
+  orderId: string,
+  paymentId: string,
+  signature: string
+): void {
+
+  this.subscriptionService.verifyPayment({
+    plan: plan,
+    razorpayOrderId: orderId,
+    razorpayPaymentId: paymentId,
+    razorpaySignature: signature
+  }).subscribe({
+
+    next: (response) => {
+
+      console.log(
+        'Payment verified successfully:',
+        response
+      );
+
+      this.upgradingPlan = '';
+
+      alert(
+        `Payment successful! Your ${plan} plan is now active.`
       );
 
       this.loadUsage();
@@ -136,7 +272,7 @@ export class PricingComponent implements OnInit {
     error: (error) => {
 
       console.error(
-        'Subscription upgrade failed:',
+        'Payment verification failed:',
         error
       );
 
@@ -144,10 +280,9 @@ export class PricingComponent implements OnInit {
 
       alert(
         error?.error?.message ||
-        'Unable to change subscription plan.'
+        'Payment verification failed. Please contact support if your payment was deducted.'
       );
     }
-
   });
 }
 }
