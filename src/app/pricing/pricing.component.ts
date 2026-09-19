@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SubscriptionService } from '../core/services/subscription.service';
 import { SubscriptionPlan } from '../core/models/subscription-plan.model';
 import { SubscriptionUsage } from '../core/models/subscription-usage.model';
+import { ChangeDetectorRef } from '@angular/core';
 
 
 declare var Razorpay: any;
@@ -38,7 +39,8 @@ export class PricingComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private subscriptionService: SubscriptionService
+    private subscriptionService: SubscriptionService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -63,19 +65,32 @@ export class PricingComponent implements OnInit {
   }
 
   loadUsage(): void {
-    this.subscriptionService.getUsage().subscribe({
-      next: (usage) => {
-        this.usage = usage;
+  this.subscriptionService.getUsage().subscribe({
+    next: (usage) => {
 
-        this.loading = false;
-      },
-      error: (error) => {
-        console.error('Failed to load subscription usage:', error);
+      this.usage = usage;
 
-        this.loading = false;
-      }
-    });
-  }
+      console.log('Pricing usage refreshed:', usage);
+      console.log('Pricing current plan:', this.usage?.plan);
+
+      this.loading = false;
+
+      this.cdr.detectChanges();
+    },
+
+    error: (error) => {
+
+      console.error(
+        'Failed to load subscription usage:',
+        error
+      );
+
+      this.loading = false;
+
+      this.cdr.detectChanges();
+    }
+  });
+}
 
   isCurrentPlan(plan: SubscriptionPlan): boolean {
     return this.usage?.plan?.toLowerCase() ===
@@ -269,20 +284,37 @@ private verifyPayment(
       this.loadUsage();
     },
 
-    error: (error) => {
+ error: (error) => {
 
-      console.error(
-        'Payment verification failed:',
-        error
-      );
+  console.error('VERIFY ERROR OBJECT:', error);
+  console.log('VERIFY STATUS:', error?.status);
+  console.log('VERIFY MESSAGE:', error?.error?.message);
 
-      this.upgradingPlan = '';
+  this.upgradingPlan = '';
 
-      alert(
-        error?.error?.message ||
-        'Payment verification failed. Please contact support if your payment was deducted.'
-      );
-    }
+  if (
+    error?.status === 409 &&
+    error?.error?.message === 'Payment has already been verified.'
+  ) {
+
+    console.log('>>> ALREADY VERIFIED CONDITION MATCHED <<<');
+
+    alert(
+      `Payment successful! Your ${plan} plan is now active.`
+    );
+
+    this.loadUsage();
+
+    return;
+  }
+
+  console.log('>>> NORMAL PAYMENT ERROR <<<');
+
+  alert(
+    error?.error?.message ||
+    'Payment verification failed. Please contact support if your payment was deducted.'
+  );
+}
   });
 }
 }
