@@ -61,6 +61,16 @@ export class SubscriptionComponent implements OnInit {
       }
     });
   }
+  isExpired(): boolean {
+  return (
+    this.subscription !== null &&
+    this.subscription.monthlyPrice > 0 &&
+    (
+      this.subscription.status?.toLowerCase() === 'expired' ||
+      !this.subscription.isActive
+    )
+  );
+}
 
   // =========================
   // Upgrade Subscription

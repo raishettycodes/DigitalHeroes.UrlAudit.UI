@@ -84,6 +84,51 @@
 
     </section>
 
+    <!-- ========================= -->
+<!-- Subscription Expired -->
+<!-- ========================= -->
+
+<section
+  class="expired-banner"
+  *ngIf="isExpired()">
+
+  <div class="expired-content">
+
+    <div class="expired-icon">
+      <mat-icon>warning</mat-icon>
+    </div>
+
+    <div>
+      <h2>Subscription Expired</h2>
+
+      <p>
+        Your {{ subscription.plan }} plan has expired.
+        Renew your plan to continue auditing websites.
+      </p>
+
+      <p *ngIf="subscription?.endDate">
+        Expired on
+       {{ subscription.endDate | date:'dd MMM yyyy, h:mm a' }}
+      </p>
+    </div>
+
+  </div>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="upgrade(subscription.plan)"
+    [disabled]="loading">
+
+    <mat-icon>autorenew</mat-icon>
+
+    Renew {{ subscription.plan }}
+
+  </button>
+
+</section>
+
 
     <!-- ========================= -->
     <!-- Monthly Usage -->
