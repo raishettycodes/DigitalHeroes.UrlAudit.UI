@@ -37,24 +37,45 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadSettings();
+    this.applyDarkMode();
+  }
+
+ onDarkModeChange(): void {
+  console.log('DARK MODE CHANGED:', this.darkMode);
+
+  this.applyDarkMode();
+
+  console.log(
+    'BODY HAS DARK MODE:',
+    document.body.classList.contains('dark-mode')
+  );
+}
+
+  private applyDarkMode(): void {
+    document.body.classList.toggle(
+      'dark-mode',
+      this.darkMode
+    );
   }
 
   saveSettings(): void {
-    const settings: UserSettings = {
-      emailNotifications: this.emailNotifications,
-      auditNotifications: this.auditNotifications,
-      weeklyReports: this.weeklyReports,
-      darkMode: this.darkMode,
-      autoAudit: this.autoAudit
-    };
+  const settings: UserSettings = {
+    emailNotifications: this.emailNotifications,
+    auditNotifications: this.auditNotifications,
+    weeklyReports: this.weeklyReports,
+    darkMode: this.darkMode,
+    autoAudit: this.autoAudit
+  };
 
-    localStorage.setItem(
-      this.settingsKey,
-      JSON.stringify(settings)
-    );
+  localStorage.setItem(
+    this.settingsKey,
+    JSON.stringify(settings)
+  );
 
-    alert('Settings saved successfully.');
-  }
+  this.applyDarkMode();
+
+  alert('Settings saved successfully.');
+}
 
   private loadSettings(): void {
     const savedSettings =
@@ -91,4 +112,3 @@ export class SettingsComponent implements OnInit {
     }
   }
 }
-

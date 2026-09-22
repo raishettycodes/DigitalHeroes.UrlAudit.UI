@@ -3,11 +3,15 @@
 ===================================================== */
 
 .audit-result-container {
+  width: 100%;
   padding: 24px;
-  background: #f8fafc;
-  color: #1e293b;
+
+  background: #121212;
+  color: #e5e7eb;
+
   max-height: 90vh;
   overflow-y: auto;
+
   box-sizing: border-box;
 }
 
@@ -55,10 +59,6 @@
   font-size: 12px;
 }
 
-
-/* =====================================================
-   SUMMARY
-===================================================== */
 
 .summary-grid {
   display: grid;
@@ -429,13 +429,35 @@
 .audit-result-footer {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 
   margin-top: 24px;
   padding-top: 18px;
 
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid #3a3a3a;
 }
 
+.audit-result-footer button {
+  color: #ffffff !important;
+  border-color: #64748b !important;
+}
+
+.audit-result-footer button mat-icon {
+  color: #ffffff !important;
+}
+
+.audit-result-footer button {
+  color: #ffffff !important;
+  border-color: #64748b !important;
+}
+
+.audit-result-footer button mat-icon {
+  color: #ffffff !important;
+}
+
+.audit-result-footer button {
+  color: #ffffff !important;
+}
 
 /* =====================================================
    SCROLLBAR
@@ -518,4 +540,183 @@
   .audit-result-footer {
     margin-top: 20px;
   }
+}
+/* =====================================================
+   AUDIT RESULT - DARK MODE
+===================================================== */
+
+:host-context(.dark-mode) .audit-result-container {
+  background: #121212 !important;
+  color: #e5e7eb !important;
+}
+
+/* Header */
+:host-context(.dark-mode) .audit-header h2 {
+  color: #ffffff !important;
+}
+
+:host-context(.dark-mode) .audit-url {
+  color: #a5b4fc !important;
+}
+
+:host-context(.dark-mode) .audit-date {
+  color: #94a3b8 !important;
+}
+
+/* Summary cards */
+:host-context(.dark-mode) .summary-card {
+  background: #1e1e1e !important;
+  border-color: #3a3a3a !important;
+}
+
+:host-context(.dark-mode) .summary-icon {
+  background: #292f4a !important;
+  color: #a5b4fc !important;
+}
+
+:host-context(.dark-mode) .summary-icon mat-icon {
+  color: #a5b4fc !important;
+}
+
+:host-context(.dark-mode) .summary-label {
+  color: #94a3b8 !important;
+}
+
+:host-context(.dark-mode) .summary-value {
+  color: #ffffff !important;
+}
+
+/* Status colors */
+:host-context(.dark-mode) .success {
+  color: #6ee7b7 !important;
+}
+
+:host-context(.dark-mode) .failed {
+  color: #fca5a5 !important;
+}
+
+:host-context(.dark-mode) .warning {
+  color: #fbbf24 !important;
+}
+
+/* Section cards */
+:host-context(.dark-mode) .section-card,
+:host-context(.dark-mode) .seo-score-card,
+:host-context(.dark-mode) .audit-message-card {
+  background: #1e1e1e !important;
+  border-color: #3a3a3a !important;
+}
+
+/* Section titles */
+:host-context(.dark-mode) .section-title {
+  color: #ffffff !important;
+}
+
+:host-context(.dark-mode) .section-title mat-icon {
+  color: #a5b4fc !important;
+}
+
+/* Audit message */
+:host-context(.dark-mode) .audit-message {
+  color: #cbd5e1 !important;
+}
+
+/* SEO analysis */
+:host-context(.dark-mode) .seo-item {
+  background: #292929 !important;
+}
+
+:host-context(.dark-mode) .seo-label {
+  color: #94a3b8 !important;
+}
+
+:host-context(.dark-mode) .seo-value {
+  color: #e5e7eb !important;
+}
+
+:host-context(.dark-mode) .missing {
+  color: #94a3b8 !important;
+}
+
+/* SEO recommendations */
+:host-context(.dark-mode) .recommendation {
+  background: #3b3218 !important;
+  border-color: #6b5a20 !important;
+  color: #fcd34d !important;
+}
+
+:host-context(.dark-mode) .recommendation mat-icon {
+  color: #fbbf24 !important;
+}
+
+/* Technical details */
+:host-context(.dark-mode) .technical-item {
+  background: #292929 !important;
+}
+
+:host-context(.dark-mode) .technical-label {
+  color: #94a3b8 !important;
+}
+
+:host-context(.dark-mode) .technical-value {
+  color: #e5e7eb !important;
+}
+
+:host-context(.dark-mode) .technical-value a {
+  color: #a5b4fc !important;
+}
+
+/* SEO score */
+:host-context(.dark-mode) .seo-score-inner {
+  background: #1e1e1e !important;
+}
+
+:host-context(.dark-mode) .seo-score-number {
+  color: #ffffff !important;
+}
+
+:host-context(.dark-mode) .seo-score-total {
+  color: #94a3b8 !important;
+}
+
+:host-context(.dark-mode) .seo-excellent {
+  background: #12352b !important;
+  color: #6ee7b7 !important;
+}
+
+:host-context(.dark-mode) .seo-good {
+  background: #172554 !important;
+  color: #93c5fd !important;
+}
+
+:host-context(.dark-mode) .seo-warning {
+  background: #3b3218 !important;
+  color: #fbbf24 !important;
+}
+
+:host-context(.dark-mode) .seo-poor {
+  background: #3b1f23 !important;
+  color: #fca5a5 !important;
+}
+
+:host-context(.dark-mode) .seo-grade p {
+  color: #94a3b8 !important;
+}
+
+/* Footer */
+:host-context(.dark-mode) .audit-result-footer {
+  border-top-color: #3a3a3a !important;
+}
+
+/* Scrollbar */
+:host-context(.dark-mode) .audit-result-container::-webkit-scrollbar-track {
+  background: #1e1e1e !important;
+}
+
+:host-context(.dark-mode) .audit-result-container::-webkit-scrollbar-thumb {
+  background: #4b5563 !important;
+}
+
+:host-context(.dark-mode) .audit-result-container::-webkit-scrollbar-thumb:hover {
+  background: #64748b !important;
 }

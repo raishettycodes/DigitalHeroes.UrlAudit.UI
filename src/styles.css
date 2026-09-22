@@ -2,3 +2,351 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode app-root {
+  background-color: #121212 !important;
+  color: #f5f5f5 !important;
+  min-height: 100vh;
+}
+
+body.dark-mode .settings-container,
+body.dark-mode .page-container,
+body.dark-mode .dashboard-container {
+  background-color: #121212 !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .settings-card,
+body.dark-mode .card,
+body.dark-mode .dashboard-card {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode strong,
+body.dark-mode label {
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background-color: #2a2a2a !important;
+  color: #ffffff !important;
+  border-color: #555 !important;
+}
+body.dark-mode mat-nav-list .mat-mdc-list-item,
+body.dark-mode mat-nav-list .mat-mdc-list-item .mdc-list-item__primary-text,
+body.dark-mode mat-nav-list .mat-mdc-list-item mat-icon {
+  color: #f5f5f5 !important;
+}
+body.dark-mode .dashboard-container h4,
+body.dark-mode .dashboard-container h5,
+body.dark-mode .dashboard-container mat-icon {
+  color: #f5f5f5 !important;
+}
+/* Dashboard - Performance and Recent Audits dark mode */
+body.dark-mode .performance-section .chart-card,
+body.dark-mode .recent-audits .empty-state {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .recent-audits .audit-count {
+  background-color: #2a2a2a !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .recent-audits .mat-mdc-paginator {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .recent-audits .mat-mdc-paginator * {
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .performance-section .chart-card *,
+body.dark-mode .recent-audits .empty-state * {
+  color: #f5f5f5 !important;
+}
+/* Angular Material components - Dark Mode */
+
+body.dark-mode .mat-mdc-card,
+body.dark-mode .mat-mdc-card.section-card {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .mat-mdc-card * {
+  color: #f5f5f5;
+}
+
+body.dark-mode .mat-mdc-table {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .mat-mdc-header-row,
+body.dark-mode .mat-mdc-row {
+  background-color: #1e1e1e !important;
+}
+
+body.dark-mode .mat-mdc-header-cell,
+body.dark-mode .mat-mdc-cell {
+  color: #f5f5f5 !important;
+  border-bottom-color: #444 !important;
+}
+
+body.dark-mode .mat-mdc-paginator {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .mat-mdc-paginator * {
+  color: #f5f5f5 !important;
+}
+
+/* Websites page - Dark Mode */
+
+body.dark-mode .website-form-card,
+body.dark-mode .search-box {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .website-form-card * {
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .search-box * {
+  color: #f5f5f5 !important;
+}
+/* Empty state cards - Dark Mode */
+body.dark-mode .empty-state {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .empty-state * {
+  color: #f5f5f5 !important;
+}
+/* Reports page - Dark Mode */
+body.dark-mode .reports-page .stat-card,
+body.dark-mode .reports-page .report-card {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .reports-page .stat-icon {
+  background-color: #2a2a2a !important;
+}
+
+body.dark-mode .reports-page .stat-card span,
+body.dark-mode .reports-page .card-header p,
+body.dark-mode .reports-page .seo-score span,
+body.dark-mode .reports-page .empty-state {
+  color: #bdbdbd !important;
+}
+
+body.dark-mode .reports-page .stat-card h2,
+body.dark-mode .reports-page .card-header h2,
+body.dark-mode .reports-page .rate-number,
+body.dark-mode .reports-page .seo-score strong {
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .reports-page .seo-label,
+body.dark-mode .reports-page .seo-score-badge {
+  background-color: #2a2a2a !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .reports-page .rate-bar {
+  background-color: #3a3a3a !important;
+}
+
+body.dark-mode .reports-page table {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .reports-page th,
+body.dark-mode .reports-page td {
+  color: #f5f5f5 !important;
+  border-bottom-color: #444 !important;
+}
+
+body.dark-mode .reports-page th {
+  color: #d5d5d5 !important;
+}
+
+body.dark-mode .reports-page .website-cell,
+body.dark-mode .reports-page .website-cell span {
+  color: #f5f5f5 !important;
+}
+/* Subscription page - Dark Mode */
+body.dark-mode .current-plan-card,
+body.dark-mode .usage-card,
+body.dark-mode .plan-card {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .current-plan-card h1,
+body.dark-mode .current-plan-card h2,
+body.dark-mode .current-plan-card h3,
+body.dark-mode .current-plan-card strong,
+body.dark-mode .usage-card h1,
+body.dark-mode .usage-card h2,
+body.dark-mode .usage-card h3,
+body.dark-mode .usage-card strong,
+body.dark-mode .plan-card h1,
+body.dark-mode .plan-card h2,
+body.dark-mode .plan-card h3,
+body.dark-mode .plan-card strong {
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .current-plan-card p,
+body.dark-mode .usage-card p,
+body.dark-mode .plan-card p {
+  color: #bdbdbd !important;
+}
+
+/* Subscription headings and labels */
+body.dark-mode .current-plan-card .card-title,
+body.dark-mode .usage-card .card-title,
+body.dark-mode .plan-card .plan-name,
+body.dark-mode .plan-card .plan-description {
+  color: #f5f5f5 !important;
+}
+
+/* Keep icons visible with their original semantic colors */
+body.dark-mode .current-plan-card mat-icon,
+body.dark-mode .usage-card mat-icon,
+body.dark-mode .plan-card mat-icon {
+  color: inherit;
+}
+
+body.dark-mode .current-plan-card .mat-icon,
+body.dark-mode .usage-card .mat-icon,
+body.dark-mode .plan-card .mat-icon {
+  color: inherit;
+}
+
+/* Usage numbers */
+body.dark-mode .usage-card .usage-value,
+body.dark-mode .usage-card .usage-number {
+  color: #f5f5f5 !important;
+}
+
+/* Plan feature text */
+body.dark-mode .plan-card li,
+body.dark-mode .plan-card .feature,
+body.dark-mode .plan-card .feature-text {
+  color: #f5f5f5 !important;
+}
+
+/* Keep Angular Material buttons readable */
+body.dark-mode .plan-card button.mat-primary {
+  color: #ffffff !important;
+}
+
+body.dark-mode .plan-card button.mat-mdc-raised-button.mat-primary {
+  background-color: #3f51b5 !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .plan-card button.mat-mdc-outlined-button.mat-primary {
+  color: #9fa8da !important;
+  border-color: #9fa8da !important;
+}
+
+/* Disabled Current Plan button */
+body.dark-mode .current-plan-card button:disabled {
+  color: #9e9e9e !important;
+}
+
+/* Keep success/check icons green */
+body.dark-mode .plan-card mat-icon.check,
+body.dark-mode .plan-card mat-icon.check_circle {
+  color: #047857 !important;
+}
+
+/* Featured plan */
+body.dark-mode .plan-card.featured {
+  background-color: #1e1e1e !important;
+}
+/* Subscription - Monthly Usage values in Dark Mode */
+body.dark-mode .usage-card .usage-value,
+body.dark-mode .usage-card .usage-number,
+body.dark-mode .usage-card .usage-stat,
+body.dark-mode .usage-card .stat-value {
+  color: #ffffff !important;
+}
+/* Subscription - Monthly Usage items - Dark Mode */
+body.dark-mode .usage-card .usage-item {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .usage-card .usage-item strong {
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .usage-card .usage-item span {
+  color: #bdbdbd !important;
+}
+/* Subscription plan prices - Dark Mode */
+body.dark-mode .plan-card .price {
+  color: #ffffff !important;
+}
+
+body.dark-mode .plan-card .price span {
+  color: #bdbdbd !important;
+}
+
+/* Current Plan button - Dark Mode */
+body.dark-mode .plan-card button.mat-mdc-outlined-button:disabled {
+  color: #bdbdbd !important;
+  border-color: #757575 !important;
+  opacity: 1 !important;
+}
+/* =====================================================
+   ANGULAR MATERIAL DIALOGS - DARK MODE
+===================================================== */
+
+body.dark-mode .mat-mdc-dialog-container {
+  --mdc-dialog-container-color: #1e1e1e !important;
+}
+
+body.dark-mode .mat-mdc-dialog-surface {
+  background-color: #1e1e1e !important;
+  color: #e5e7eb !important;
+}
+
+body.dark-mode .mat-mdc-dialog-title,
+body.dark-mode [mat-dialog-title] {
+  color: #ffffff !important;
+}
+
+body.dark-mode .mat-mdc-dialog-content {
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .mat-mdc-dialog-actions {
+  color: #e5e7eb !important;
+}
+
+body.dark-mode .mat-mdc-dialog-actions button {
+  color: #a5b4fc !important;
+}

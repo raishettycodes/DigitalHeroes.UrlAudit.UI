@@ -152,6 +152,77 @@
   box-shadow: none;
 }
 
+/* Register link */
+
+.register-link {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+
+  color: #374151;
+}
+
+.register-link a {
+  margin-left: 5px;
+  color: #1976d2;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* DARK MODE */
+
+:host-context(body.dark-mode) .login-container {
+  background: #1f2937;
+  border: 1px solid #374151;
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.35);
+}
+
+:host-context(body.dark-mode) .login-container h2 {
+  color: #f9fafb;
+}
+
+:host-context(body.dark-mode) .login-container label {
+  color: #d1d5db;
+}
+
+:host-context(body.dark-mode) .login-container input {
+  background: #374151;
+  border-color: #4b5563;
+  color: #f9fafb;
+}
+
+:host-context(body.dark-mode) .login-container input::placeholder {
+  color: #9ca3af;
+}
+
+:host-context(body.dark-mode) .login-container input:focus {
+  background: #374151;
+  border-color: #818cf8;
+
+  box-shadow:
+    0 0 0 3px rgba(129, 140, 248, 0.18);
+}
+
+:host-context(body.dark-mode) .register-link {
+  color: #d1d5db;
+}
+
+:host-context(body.dark-mode) .register-link a {
+  color: #93c5fd;
+}
+
+:host-context(body.dark-mode) .error-message {
+  background: #3f1d1d;
+  border-color: #7f1d1d;
+  color: #fca5a5;
+}
+
 /* Mobile */
 
 @media (max-width: 600px) {
@@ -169,4 +240,34 @@
     font-size: 24px;
     margin-bottom: 25px;
   }
+}
+:host-context(body.dark-mode) .login-container {
+  background: #1f2937;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+:host-context(body.dark-mode) .login-container h2 {
+  color: #f9fafb;
+}
+
+:host-context(body.dark-mode) .login-container label {
+  color: #d1d5db;
+}
+
+:host-context(body.dark-mode) .login-container input {
+  background: #111827;
+  border-color: #4b5563;
+  color: #f9fafb;
+}
+
+:host-context(body.dark-mode) .login-container input::placeholder {
+  color: #9ca3af;
+}
+
+:host-context(body.dark-mode) .register-link {
+  color: #d1d5db;
+}
+
+:host-context(body.dark-mode) .register-link a {
+  color: #93c5fd;
 }

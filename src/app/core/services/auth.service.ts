@@ -12,6 +12,14 @@ export interface LoginResponse {
   token: string;
 }
 
+export interface RegisterRequest {
+  fullName: string;
+  email: string;
+  password: string;
+}
+
+export type RegisterResponse = string;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,6 +43,14 @@ export class AuthService {
         })
       );
   }
+
+  register(request: RegisterRequest): Observable<RegisterResponse> {
+  return this.http.post<RegisterResponse>(
+    `${this.apiBaseUrl}/Auth/register`,
+    request,
+    { responseType: 'text' as 'json' }
+  );
+}
 
   logout(): void {
     localStorage.removeItem(this.tokenKey);

@@ -1,0 +1,163 @@
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.register-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.register-header h1 {
+  margin: 0 0 8px;
+}
+
+.register-header p {
+  margin: 0;
+  color: #666;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #1976d2;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #1976d2;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  margin-bottom: 16px;
+  padding: 10px;
+  border-radius: 6px;
+  background: #ffebee;
+  color: #c62828;
+}
+
+.success-message {
+  margin-bottom: 16px;
+  padding: 10px;
+  border-radius: 6px;
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.login-link {
+  margin-top: 20px;
+  text-align: center;
+  color: #666;
+}
+
+.link-button {
+  border: none;
+  background: none;
+  color: #1976d2;
+  cursor: pointer;
+  font-weight: 500;
+}
+/* DARK MODE */
+
+:host-context(body.dark-mode) .register-page {
+  background: #111827;
+}
+
+:host-context(body.dark-mode) .register-card {
+  background: #1f2937;
+  border: 1px solid #374151;
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.35);
+}
+
+:host-context(body.dark-mode) .register-header h1 {
+  color: #f9fafb;
+}
+
+:host-context(body.dark-mode) .register-header p {
+  color: #d1d5db;
+}
+
+:host-context(body.dark-mode) .form-group label {
+  color: #d1d5db;
+}
+
+:host-context(body.dark-mode) .form-group input {
+  background: #374151;
+  border-color: #4b5563;
+  color: #f9fafb;
+}
+
+:host-context(body.dark-mode) .form-group input::placeholder {
+  color: #9ca3af;
+}
+
+:host-context(body.dark-mode) .form-group input:focus {
+  background: #374151;
+  border-color: #818cf8;
+
+  box-shadow:
+    0 0 0 3px rgba(129, 140, 248, 0.15);
+}
+
+:host-context(body.dark-mode) .error-message {
+  background: #3f1d1d;
+  color: #fca5a5;
+  border: 1px solid #7f1d1d;
+}
+
+:host-context(body.dark-mode) .success-message {
+  background: #17351f;
+  color: #86efac;
+  border: 1px solid #166534;
+}
+
+:host-context(body.dark-mode) .login-link {
+  color: #d1d5db;
+}
+
+:host-context(body.dark-mode) .link-button {
+  color: #93c5fd;
+}

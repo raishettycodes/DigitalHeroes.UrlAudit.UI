@@ -431,3 +431,158 @@
 .delete-button:hover {
   opacity: 0.8;
 }
+/* =========================================================
+   NOTIFICATIONS - DARK MODE
+   ========================================================= */
+
+:host-context(.dark-mode) .page-container {
+  color: #e5e7eb;
+}
+
+/* Header */
+:host-context(.dark-mode) .page-header h1 {
+  color: #ffffff;
+}
+
+:host-context(.dark-mode) .page-header p {
+  color: #cbd5e1;
+}
+
+:host-context(.dark-mode) .header-icon {
+  background: #252a3d;
+}
+
+:host-context(.dark-mode) .header-icon mat-icon {
+  color: #a5b4fc;
+}
+
+/* Loading */
+:host-context(.dark-mode) .loading-state {
+  background: #1e1e1e;
+  color: #cbd5e1;
+}
+
+/* Summary */
+:host-context(.dark-mode) .summary-card {
+  background: #1e1e1e;
+  border: 1px solid #3a3a3a;
+  color: #e5e7eb;
+}
+
+:host-context(.dark-mode) .summary-icon {
+  background: #252a3d;
+}
+
+:host-context(.dark-mode) .summary-icon mat-icon {
+  color: #a5b4fc;
+}
+
+:host-context(.dark-mode) .summary-content span {
+  color: #cbd5e1;
+}
+
+:host-context(.dark-mode) .summary-content strong {
+  color: #ffffff;
+}
+
+/* Notification cards */
+:host-context(.dark-mode) .notification-card {
+  background: #1e1e1e;
+  border-color: #3a3a3a;
+  color: #e5e7eb;
+}
+
+:host-context(.dark-mode) .notification-card:hover {
+  background: #252525;
+  border-color: #4b5563;
+}
+
+/* Unread notification */
+:host-context(.dark-mode) .notification-card.unread {
+  background: #20243a;
+  border-left-color: #818cf8;
+}
+
+/* Notification content */
+:host-context(.dark-mode) .notification-content h3 {
+  color: #ffffff;
+}
+
+:host-context(.dark-mode) .notification-content p {
+  color: #cbd5e1;
+}
+
+:host-context(.dark-mode) .notification-content small {
+  color: #94a3b8;
+}
+
+:host-context(.dark-mode) .notification-content small mat-icon {
+  color: #94a3b8;
+}
+
+/* New badge */
+:host-context(.dark-mode) .unread-label {
+  background: #30365a;
+  color: #c7d2fe;
+}
+
+/* Notification icons */
+:host-context(.dark-mode) .notification-icon {
+  background: #2a2f3a;
+}
+
+:host-context(.dark-mode) .notification-icon mat-icon {
+  color: #cbd5e1;
+}
+
+:host-context(.dark-mode) .notification-card.success .notification-icon {
+  background: #12352b;
+}
+
+:host-context(.dark-mode) .notification-card.success .notification-icon mat-icon {
+  color: #6ee7b7;
+}
+
+:host-context(.dark-mode) .notification-card.audit .notification-icon {
+  background: #252a3d;
+}
+
+:host-context(.dark-mode) .notification-card.audit .notification-icon mat-icon {
+  color: #a5b4fc;
+}
+
+/* Unread dot */
+:host-context(.dark-mode) .unread-dot {
+  background: #818cf8;
+}
+
+/* Delete button */
+:host-context(.dark-mode) .delete-button {
+  color: #cbd5e1;
+}
+
+:host-context(.dark-mode) .delete-button:hover {
+  color: #ffffff;
+}
+
+/* Empty state */
+:host-context(.dark-mode) .empty-state {
+  background: #1e1e1e;
+  color: #e5e7eb;
+}
+
+:host-context(.dark-mode) .empty-state h3 {
+  color: #ffffff;
+}
+
+:host-context(.dark-mode) .empty-state p {
+  color: #cbd5e1;
+}
+
+:host-context(.dark-mode) .empty-icon {
+  background: #2a2f3a;
+}
+
+:host-context(.dark-mode) .empty-icon mat-icon {
+  color: #94a3b8;
+}

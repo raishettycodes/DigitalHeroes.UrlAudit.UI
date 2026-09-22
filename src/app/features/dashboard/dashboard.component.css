@@ -857,3 +857,186 @@ mat-paginator {
   }
 
 }
+/* =========================================================
+   DASHBOARD - DARK MODE
+   ========================================================= */
+
+:host-context(.dark-mode) .dashboard-main {
+  background: #121212;
+  color: #e5e7eb;
+}
+
+/* Statistics cards */
+:host-context(.dark-mode) .statistics-card {
+  background: #1e1e1e;
+  color: #e5e7eb;
+  border: 1px solid #3a3a3a;
+}
+
+:host-context(.dark-mode) .statistics-card h5 {
+  color: #cbd5e1;
+}
+
+:host-context(.dark-mode) .statistics-card h2 {
+  color: #ffffff;
+}
+
+/* Statistics icons */
+:host-context(.dark-mode) .stat-icon {
+  background: #292f4a;
+}
+
+:host-context(.dark-mode) .stat-icon mat-icon {
+  color: #a5b4fc;
+}
+
+/* General cards */
+:host-context(.dark-mode) .card {
+  background: #1e1e1e;
+  color: #e5e7eb;
+  border: 1px solid #3a3a3a;
+}
+
+/* Card headings */
+:host-context(.dark-mode) .card-heading h4 {
+  color: #ffffff;
+}
+
+:host-context(.dark-mode) .card-heading p {
+  color: #94a3b8;
+}
+
+:host-context(.dark-mode) .card-heading > mat-icon {
+  color: #cbd5e1;
+}
+
+/* Audit search */
+:host-context(.dark-mode) .audit-search {
+  background: #1e1e1e;
+  border-color: #4b5563;
+}
+
+:host-context(.dark-mode) .audit-search > mat-icon {
+  color: #cbd5e1;
+}
+
+:host-context(.dark-mode) .audit-search input {
+  color: #ffffff;
+  background: transparent;
+}
+
+:host-context(.dark-mode) .audit-search input::placeholder {
+  color: #94a3b8;
+}
+
+:host-context(.dark-mode) .audit-search:focus-within {
+  border-color: #818cf8;
+}
+
+/* Section headings */
+:host-context(.dark-mode) .section-header h2 {
+  color: #ffffff;
+}
+
+:host-context(.dark-mode) .section-header h2 mat-icon {
+  color: #cbd5e1;
+}
+
+:host-context(.dark-mode) .section-header p {
+  color: #94a3b8;
+}
+
+/* Audit count */
+:host-context(.dark-mode) .audit-count {
+  background: #292f4a;
+  color: #c7d2fe;
+}
+
+/* Chart */
+:host-context(.dark-mode) .chart-card {
+  background: #1e1e1e;
+  border: 1px solid #3a3a3a;
+}
+
+/* Recent audits table */
+:host-context(.dark-mode) .audit-table-container {
+  background: #1e1e1e;
+  border: 1px solid #3a3a3a;
+}
+
+:host-context(.dark-mode) .audit-table thead {
+  background: #292929;
+}
+
+:host-context(.dark-mode) .audit-table th {
+  color: #cbd5e1;
+  border-bottom-color: #3f3f46;
+}
+
+:host-context(.dark-mode) .audit-table td {
+  color: #e5e7eb;
+  border-bottom-color: #3a3a3a;
+}
+
+:host-context(.dark-mode) .audit-row:hover {
+  background: #292929;
+}
+
+/* Website */
+:host-context(.dark-mode) .website-cell mat-icon {
+  color: #94a3b8;
+}
+
+/* HTTP status */
+:host-context(.dark-mode) .http-status {
+  background: #292929;
+  color: #e5e7eb;
+}
+
+/* Success status */
+:host-context(.dark-mode) .status-badge.success {
+  background: #12352b;
+  color: #6ee7b7;
+}
+
+/* Failed status */
+:host-context(.dark-mode) .status-badge.failed {
+  background: #3b1f23;
+  color: #fca5a5;
+}
+
+/* Date */
+:host-context(.dark-mode) .date-cell strong {
+  color: #e5e7eb;
+}
+
+:host-context(.dark-mode) .date-cell small {
+  color: #94a3b8;
+}
+
+/* Table action icons */
+:host-context(.dark-mode) .audit-table button mat-icon {
+  color: #cbd5e1;
+}
+
+/* Paginator */
+:host-context(.dark-mode) mat-paginator {
+  background: #1e1e1e;
+  color: #e5e7eb;
+  border-top-color: #3a3a3a;
+}
+
+/* Empty/loading states */
+:host-context(.dark-mode) .loading-state,
+:host-context(.dark-mode) .empty-state {
+  background: #1e1e1e;
+  color: #cbd5e1;
+}
+
+:host-context(.dark-mode) .empty-state h3 {
+  color: #ffffff;
+}
+
+:host-context(.dark-mode) .empty-state p {
+  color: #94a3b8;
+}

@@ -187,3 +187,41 @@ mat-card-actions {
   }
 
 }
+/* =========================================================
+   PRICING - DARK MODE BUTTONS
+   ========================================================= */
+
+:host-context(.dark-mode) .plan-button {
+  color: #ffffff !important;
+  border-color: #818cf8 !important;
+}
+
+/* Raised / filled Upgrade buttons */
+:host-context(.dark-mode) .plan-button.mat-mdc-raised-button,
+:host-context(.dark-mode) .plan-button.mat-mdc-unelevated-button {
+  background-color: #3f51b5 !important;
+  color: #ffffff !important;
+}
+
+/* Stroked Downgrade buttons */
+:host-context(.dark-mode) .plan-button.mat-mdc-outlined-button {
+  background-color: transparent !important;
+  color: #a5b4fc !important;
+  border-color: #818cf8 !important;
+}
+
+/* Hover */
+:host-context(.dark-mode) .plan-button:hover {
+  color: #ffffff !important;
+}
+
+:host-context(.dark-mode) .plan-button.mat-mdc-outlined-button:hover {
+  background-color: rgba(129, 140, 248, 0.12) !important;
+}
+
+/* Disabled button */
+:host-context(.dark-mode) .plan-button:disabled {
+  color: #94a3b8 !important;
+  background-color: #333333 !important;
+  border-color: #444444 !important;
+}

@@ -447,3 +447,76 @@
     gap: 6px;
   }
 }
+/* =========================================================
+   WEBSITES - DARK MODE
+   ========================================================= */
+
+:host-context(.dark-mode) .website-card {
+  background: #1e1e1e !important;
+  border-color: #3a3a3a !important;
+  color: #e5e7eb !important;
+}
+
+:host-context(.dark-mode) .website-info h3 {
+  color: #ffffff !important;
+}
+
+:host-context(.dark-mode) .website-info a {
+  color: #a5b4fc !important;
+}
+
+:host-context(.dark-mode) .website-icon {
+  background: #292f4a !important;
+}
+
+:host-context(.dark-mode) .website-icon mat-icon {
+  color: #a5b4fc !important;
+}
+
+/* Active status */
+:host-context(.dark-mode) .status-badge.active {
+  background: #12352b !important;
+  color: #6ee7b7 !important;
+}
+
+:host-context(.dark-mode) .status-badge.active mat-icon {
+  color: #6ee7b7 !important;
+}
+
+/* Inactive status */
+:host-context(.dark-mode) .status-badge.inactive {
+  background: #3b2f18 !important;
+  color: #fbbf24 !important;
+}
+
+:host-context(.dark-mode) .status-badge.inactive mat-icon {
+  color: #fbbf24 !important;
+}
+
+/* Card action area */
+:host-context(.dark-mode) .website-card-actions {
+  border-top-color: #3a3a3a !important;
+}
+
+/* Search */
+:host-context(.dark-mode) .search-box {
+  background: #1e1e1e !important;
+  border-color: #4b5563 !important;
+}
+
+:host-context(.dark-mode) .search-box mat-icon {
+  color: #cbd5e1 !important;
+}
+
+:host-context(.dark-mode) .search-box input {
+  color: #ffffff !important;
+}
+
+:host-context(.dark-mode) .search-box input::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Website count */
+:host-context(.dark-mode) .website-count {
+  color: #cbd5e1 !important;
+}

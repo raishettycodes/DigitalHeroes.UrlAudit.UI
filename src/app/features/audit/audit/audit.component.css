@@ -945,3 +945,24 @@ table {
   color: #b91c1c;
   background: #fee2e2;
 }
+/* =====================================================
+   AUDIT HISTORY - DARK MODE STATUS BADGES
+===================================================== */
+
+:host-context(.dark-mode) .status-success {
+  color: #6ee7b7 !important;
+  background: #12352b !important;
+}
+
+:host-context(.dark-mode) .status-success mat-icon {
+  color: #6ee7b7 !important;
+}
+
+:host-context(.dark-mode) .status-failed {
+  color: #fca5a5 !important;
+  background: #3b1f23 !important;
+}
+
+:host-context(.dark-mode) .status-failed mat-icon {
+  color: #fca5a5 !important;
+}

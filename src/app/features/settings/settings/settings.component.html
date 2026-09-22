@@ -209,7 +209,6 @@
 
       <div>
         <strong>Dark Mode</strong>
-
         <p>
           Use a dark appearance for the dashboard.
         </p>
@@ -219,6 +218,7 @@
         <input
           type="checkbox"
           [(ngModel)]="darkMode"
+          (change)="onDarkModeChange()"
           aria-label="Dark Mode">
       </label>
 

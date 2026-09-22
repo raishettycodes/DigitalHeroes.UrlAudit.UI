@@ -193,20 +193,27 @@ export class SubscriptionComponent implements OnInit {
   // Verify Payment
   // =========================
 
-  private verifyPayment(
-    plan: string,
-    orderId: string,
-    paymentId: string,
-    signature: string
-  ): void {
+ private verifyPayment(
+  plan: string,
+  orderId: string,
+  paymentId: string,
+  signature: string
+): void {
 
-    this.subscriptionService.verifyPayment({
-      plan: plan,
-      razorpayOrderId: orderId,
-      razorpayPaymentId: paymentId,
-      razorpaySignature: signature
-    }).subscribe({
+  console.log('VERIFY PAYMENT CALLED:', {
+    plan,
+    orderId,
+    paymentId,
+    signature
+  });
 
+  this.subscriptionService.verifyPayment({
+    plan: plan,
+    razorpayOrderId: orderId,
+    razorpayPaymentId: paymentId,
+    razorpaySignature: signature
+  }).subscribe({
+    
       next: (response) => {
 
         console.log(

@@ -11,7 +11,7 @@
 
       <div>
         <h2>
-          {{ website?.name || 'Website Details' }}
+          {{ website.name || 'Website Details' }}
         </h2>
 
         <a
@@ -74,7 +74,7 @@
 
         <p>
           No audit history is available for
-          {{ website?.name }}.
+           {{ website.name }}.
         </p>
 
       </div>
@@ -1101,7 +1101,7 @@
           <div
             class="history-table-container"
             *ngIf="sortedHistory.length > 0">
-
+            
             <table
               mat-table
               [dataSource]="paginatedHistory"

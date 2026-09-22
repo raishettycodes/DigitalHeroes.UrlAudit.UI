@@ -174,3 +174,108 @@ th {
   }
 
 }
+/* =========================================================
+   ADMIN - DARK MODE
+   ========================================================= */
+
+:host-context(.dark-mode) .admin-container {
+  color: #e5e7eb;
+}
+
+/* Page header */
+:host-context(.dark-mode) .page-header h1 {
+  color: #ffffff;
+}
+
+:host-context(.dark-mode) .page-header p {
+  color: #cbd5e1;
+}
+
+/* Statistics cards */
+:host-context(.dark-mode) .stat-card {
+  background: #1e1e1e;
+  color: #e5e7eb;
+  border: 1px solid #3a3a3a;
+}
+
+:host-context(.dark-mode) .stat-card span {
+  color: #94a3b8;
+}
+
+:host-context(.dark-mode) .stat-card strong {
+  color: #ffffff;
+}
+
+/* Main cards */
+:host-context(.dark-mode) .admin-card {
+  background: #1e1e1e;
+  color: #e5e7eb;
+  border: 1px solid #3a3a3a;
+}
+
+/* Card headers */
+:host-context(.dark-mode) .card-header h2 {
+  color: #ffffff;
+}
+
+:host-context(.dark-mode) .card-header p {
+  color: #94a3b8;
+}
+
+/* Platform overview + system information */
+:host-context(.dark-mode) .overview-item,
+:host-context(.dark-mode) .system-grid > div {
+  background: #292929;
+  color: #e5e7eb;
+}
+
+:host-context(.dark-mode) .overview-item span,
+:host-context(.dark-mode) .system-grid span {
+  color: #94a3b8;
+}
+
+:host-context(.dark-mode) .overview-item strong,
+:host-context(.dark-mode) .system-grid strong {
+  color: #ffffff;
+}
+
+/* Online status */
+:host-context(.dark-mode) .status-online {
+  color: #4ade80;
+}
+
+/* Recent audits table */
+:host-context(.dark-mode) table {
+  color: #e5e7eb;
+}
+
+:host-context(.dark-mode) th {
+  color: #ffffff;
+}
+
+:host-context(.dark-mode) td {
+  color: #cbd5e1;
+}
+
+:host-context(.dark-mode) th,
+:host-context(.dark-mode) td {
+  border-bottom-color: #3a3a3a;
+}
+
+/* Successful / failed status */
+:host-context(.dark-mode) .success {
+  color: #4ade80;
+}
+
+:host-context(.dark-mode) .failed {
+  color: #f87171;
+}
+
+/* Empty state */
+:host-context(.dark-mode) .empty-state {
+  color: #94a3b8;
+}
+
+:host-context(.dark-mode) .empty-state mat-icon {
+  color: #94a3b8;
+}
