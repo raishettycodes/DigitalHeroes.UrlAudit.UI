@@ -271,3 +271,13 @@
 :host-context(body.dark-mode) .register-link a {
   color: #93c5fd;
 }
+
+.forgot-password-link {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.forgot-password-link a {
+  text-decoration: none;
+  font-weight: 500;
+}

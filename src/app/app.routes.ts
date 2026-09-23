@@ -2,6 +2,12 @@ import { Routes } from '@angular/router';
 
 import { RegisterComponent } from './features/auth/register/register.component';
 import { LoginComponent } from './features/auth/login/login.component';
+import { ForgotPasswordComponent }
+  from './features/auth/forgot-password/forgot-password.component';
+
+import { ResetPasswordComponent }
+  from './features/auth/reset-password/reset-password.component';
+
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { AuditComponent } from './features/audit/audit/audit.component';
 import { WebsitesComponent } from './features/websites/websites.component';
@@ -40,6 +46,15 @@ export const routes: Routes = [
   path: 'register',
   component: RegisterComponent
   },
+  {
+  path: 'forgot-password',
+  component: ForgotPasswordComponent
+},
+{
+  path: 'reset-password',
+  component: ResetPasswordComponent
+},
+
 
 
   // =========================

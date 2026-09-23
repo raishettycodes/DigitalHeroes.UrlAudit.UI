@@ -20,6 +20,23 @@ export interface RegisterRequest {
 
 export type RegisterResponse = string;
 
+export interface ForgotPasswordRequest {
+  email: string;
+}
+
+export interface ForgotPasswordResponse {
+  message: string;
+  resetToken?: string;
+}
+
+export interface ResetPasswordRequest {
+  token: string;
+  newPassword: string;
+}
+
+export interface ResetPasswordResponse {
+  message: string;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -49,6 +66,23 @@ export class AuthService {
     `${this.apiBaseUrl}/Auth/register`,
     request,
     { responseType: 'text' as 'json' }
+  );
+}
+forgotPassword(
+  request: ForgotPasswordRequest
+): Observable<ForgotPasswordResponse> {
+  return this.http.post<ForgotPasswordResponse>(
+    `${this.apiBaseUrl}/Auth/forgot-password`,
+    request
+  );
+}
+
+resetPassword(
+  request: ResetPasswordRequest
+): Observable<ResetPasswordResponse> {
+  return this.http.post<ResetPasswordResponse>(
+    `${this.apiBaseUrl}/Auth/reset-password`,
+    request
   );
 }
 

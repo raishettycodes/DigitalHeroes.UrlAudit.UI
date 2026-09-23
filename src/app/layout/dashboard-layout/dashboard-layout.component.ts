@@ -19,7 +19,7 @@ import { LayoutService } from '../../core/services/layout.service';
 })
 export class DashboardLayoutComponent implements OnInit, OnDestroy {
 
-  sidebarOpen = true;
+  sidebarOpen = false;
 
   private toggleSubscription?: Subscription;
 
